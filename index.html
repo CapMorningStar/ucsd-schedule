@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#182b49">
+  <title>UCSD Class Schedule & Campus Map Studio | Fall 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-950: #0a121e;
+      --navy-900: #0f1c2e;
+      --navy-800: #182b49;
+      --navy-700: #203a63;
+      --blue-600: #00629b;
+      --blue-500: #0284c7;
+      --gold-500: #ffcd00;
+      --gold-600: #e5b800;
+      --bg-slate: #f1f5f9;
+      --card-bg: #ffffff;
+      --border-color: #cbd5e1;
+      --border-light: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      
+      --dsc10-color: #1d4ed8;
+      --dsc10-bg: #eff6ff;
+      --dsc10-border: #93c5fd;
+      
+      --cogs9-color: #6d28d9;
+      --cogs9-bg: #f5f3ff;
+      --cogs9-border: #c4b5fd;
+      
+      --cogs14a-color: #b45309;
+      --cogs14a-bg: #fffbeb;
+      --cogs14a-border: #fde68a;
+      
+      --wcwp-color: #0f766e;
+      --wcwp-bg: #f0fdfa;
+      --wcwp-border: #99f6e4;
+
+      --math183-color: #e11d48;
+      --math183-bg: #fff1f2;
+      --math183-border: #fecdd3;
+      
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 28px -5px rgba(24, 43, 73, 0.14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-slate);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.4;
+      padding-bottom: 40px;
+    }
+
+    /* Top Sticky Header */
+    .top-header {
+      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-800) 60%, var(--navy-700) 100%);
+      color: #ffffff;
+      padding: 10px 16px;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .brand-group { display: flex; align-items: center; gap: 8px; }
+    .ucsd-logo-badge {
+      background: var(--gold-500);
+      color: var(--navy-950);
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 3px 7px;
+      border-radius: var(--radius-sm);
+    }
+    .header-titles h1 { font-size: 1rem; font-weight: 700; }
+    .header-titles p { font-size: 0.7rem; color: #cbd5e1; }
+    .student-badge-bar { display: flex; align-items: center; gap: 6px; }
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.12);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .stat-pill strong { color: var(--gold-500); }
+
+    /* Main Container: On Desktop 2 columns, on Mobile 1 stacked column */
+    .main-app-container {
+      max-width: 1560px;
+      margin: 12px auto 0;
+      padding: 0 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Top Control Bar */
+    .top-plan-bar {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .plan-pills-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+
+    .plan-btn {
+      background: var(--bg-slate);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.74rem;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .plan-btn.active {
+      background: var(--navy-800);
+      color: #ffffff;
+      border-color: var(--navy-800);
+    }
+    .plan-btn.my-plan {
+      background: #fdf4ff;
+      border-color: #e879f9;
+      color: #86198f;
+    }
+    .plan-btn.my-plan.active {
+      background: #a21caf;
+      border-color: #a21caf;
+      color: #ffffff;
+    }
+    .plan-btn .del-btn {
+      background: rgba(0,0,0,0.1);
+      border-radius: 999px;
+      width: 13px;
+      height: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      cursor: pointer;
+      margin-left: 2px;
+    }
+
+    .action-buttons-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      border: none;
+      padding: 6px 11px;
+      border-radius: var(--radius-sm);
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.15s;
+    }
+    .btn-action:active { opacity: 0.8; }
+    .btn-blue { background: #0284c7; color: #ffffff; }
+    .btn-gold { background: var(--gold-500); color: var(--navy-950); }
+    .btn-gray { background: #475569; color: #ffffff; }
+
+    /* =========================================================================
+       BIG VISUAL WEEKLY CALENDAR CARD
+       ========================================================================= */
+    .calendar-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .calendar-card-header {
+      padding: 10px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .calendar-card-header h2 {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--navy-900);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .calendar-status-badge {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--success);
+      background: var(--success-bg);
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    /* Scrollable Calendar Grid Container */
+    .calendar-grid-scroll-wrap {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 10px;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+    .schedule-grid-matrix {
+      display: grid;
+      grid-template-columns: 68px repeat(5, minmax(130px, 1fr));
+      grid-template-rows: 30px repeat(12, 48px);
+      gap: 3px;
+      min-width: 720px;
+      position: relative;
+    }
+
+    .grid-head-cell {
+      background: var(--bg-slate);
+      font-weight: 800;
+      font-size: 0.76rem;
+      color: var(--navy-800);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+    }
+    .time-head-cell {
+      background: #f1f5f9;
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      position: sticky;
+      left: 0;
+      z-index: 15;
+    }
+    .grid-bg-slot {
+      background: #ffffff;
+      border: 1px dashed #f1f5f9;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Class Blocks in Grid */
+    .class-event-block {
+      border-radius: var(--radius-sm);
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
+      touch-action: manipulation;
+      transition: transform 0.15s;
+    }
+    .class-event-block:active { transform: scale(0.98); }
+
+    .class-event-block.dsc10 { background: var(--dsc10-bg); border: 1.5px solid var(--dsc10-border); border-left: 4px solid var(--dsc10-color); color: var(--dsc10-color); }
+    .class-event-block.cogs9 { background: var(--cogs9-bg); border: 1.5px solid var(--cogs9-border); border-left: 4px solid var(--cogs9-color); color: var(--cogs9-color); }
+    .class-event-block.cogs14a { background: var(--cogs14a-bg); border: 1.5px solid var(--cogs14a-border); border-left: 4px solid var(--cogs14a-color); color: var(--cogs14a-color); }
+    .class-event-block.wcwp100 { background: var(--wcwp-bg); border: 1.5px solid var(--wcwp-border); border-left: 4px solid var(--wcwp-color); color: var(--wcwp-color); }
+    .class-event-block.math183 { background: var(--math183-bg); border: 1.5px solid var(--math183-border); border-left: 4px solid var(--math183-color); color: var(--math183-color); }
+
+    .ev-top-row { display: flex; justify-content: space-between; align-items: flex-start; }
+    .ev-code { font-weight: 800; font-size: 0.72rem; }
+    .ev-type-badge { font-size: 0.58rem; font-weight: 700; padding: 1px 4px; border-radius: 3px; background: rgba(0,0,0,0.06); }
+    .ev-title { font-size: 0.65rem; color: var(--text-main); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ev-bottom-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.6rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .ev-room-tag { background: rgba(0,0,0,0.07); padding: 1px 4px; border-radius: 3px; font-weight: 700; color: var(--navy-900); }
+
+    /* =========================================================================
+       COURSE SECTION CUSTOMIZER CARD
+       ========================================================================= */
+    .customizer-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .customizer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 8px;
+    }
+    .customizer-header h3 { font-size: 0.95rem; font-weight: 800; color: var(--navy-900); }
+
+    .course-tabs-scroll {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      background: var(--bg-slate);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tab-course-btn {
+      border: 1.5px solid transparent;
+      background: transparent;
+      padding: 6px 4px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      min-width: 60px;
+      transition: all 0.15s;
+    }
+    .tab-course-btn.active {
+      background: #ffffff;
+      border-color: var(--blue-500);
+      box-shadow: var(--shadow-sm);
+    }
+    .tab-c-code { font-weight: 800; font-size: 0.76rem; }
+    .tab-c-dot { font-size: 0.58rem; font-weight: 700; }
+
+    .tab-course-btn.dsc10.active { border-color: var(--dsc10-color); }
+    .tab-course-btn.dsc10 .tab-c-code { color: var(--dsc10-color); }
+    .tab-course-btn.cogs9.active { border-color: var(--cogs9-color); }
+    .tab-course-btn.cogs9 .tab-c-code { color: var(--cogs9-color); }
+    .tab-course-btn.cogs14a.active { border-color: var(--cogs14a-color); }
+    .tab-course-btn.cogs14a .tab-c-code { color: var(--cogs14a-color); }
+    .tab-course-btn.wcwp.active { border-color: var(--wcwp-color); }
+    .tab-course-btn.wcwp .tab-c-code { color: var(--wcwp-color); }
+    .tab-course-btn.math183.active { border-color: var(--math183-color); }
+    .tab-course-btn.math183 .tab-c-code { color: var(--math183-color); }
+
+    /* Section Cards Grid */
+    .section-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .sec-card {
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .sec-card.selected {
+      border-color: var(--blue-600);
+      background: #f0f9ff;
+    }
+    .sec-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sec-tag { font-weight: 800; font-size: 0.8rem; color: var(--navy-900); display: flex; align-items: center; gap: 6px; }
+    .sec-booking-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      background: var(--bg-slate);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--navy-800);
+      font-weight: 700;
+    }
+    .sec-avail {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .sec-avail.open { background: var(--success-bg); color: var(--success); }
+    .sec-avail.wl { background: var(--danger-bg); color: var(--danger); }
+
+    .sec-sch-box {
+      background: var(--bg-slate);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.68rem;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .sec-sch-item { display: flex; justify-content: space-between; align-items: center; }
+    .sec-room-link {
+      color: var(--blue-600);
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .sec-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed var(--border-light);
+      padding-top: 6px;
+    }
+    .sec-select-btn {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .sec-card.selected .sec-select-btn {
+      background: var(--navy-800);
+      color: #ffffff;
+      border-color: var(--navy-800);
+    }
+
+    /* =========================================================================
+       POPUP MODAL: CAMPUS LOCATION & GOOGLE MAPS
+       ========================================================================= */
+    .loc-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 18, 30, 0.72);
+      backdrop-filter: blur(5px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .loc-modal-overlay.show { display: flex; }
+    .loc-modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      max-width: 520px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.94); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .loc-modal-head {
+      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-800) 100%);
+      color: #ffffff;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .loc-modal-head h2 { font-size: 1.05rem; font-weight: 800; }
+    .loc-modal-head p { font-size: 0.74rem; color: #cbd5e1; }
+    .loc-modal-close-btn {
+      background: rgba(255,255,255,0.18);
+      border: none;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loc-modal-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .loc-info-box {
+      background: #eff6ff;
+      border: 1.5px solid #93c5fd;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+    }
+    .loc-info-bldg {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+    .loc-info-addr {
+      font-size: 0.78rem;
+      color: #1e3a8a;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .loc-info-badge {
+      display: inline-block;
+      margin-top: 5px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .loc-table-box {
+      background: var(--bg-slate);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .loc-t-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.76rem;
+    }
+    .loc-t-lbl { color: var(--text-muted); font-weight: 600; }
+    .loc-t-val { font-weight: 700; color: var(--navy-900); text-align: right; }
+
+    .loc-modal-btn-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+    .btn-modal-map {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-modal-copy {
+      background: var(--navy-800);
+      color: #ffffff;
+      border: none;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Comparison Modal */
+    .compare-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 18, 30, 0.72);
+      backdrop-filter: blur(5px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .compare-modal-overlay.show { display: flex; }
+    .compare-modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      max-width: 860px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 18px;
+    }
+    .compare-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.74rem;
+      margin-top: 10px;
+    }
+    .compare-tbl th, .compare-tbl td {
+      border: 1px solid var(--border-light);
+      padding: 7px 10px;
+      text-align: left;
+    }
+    .compare-tbl th { background: var(--navy-800); color: #fff; }
+
+    .toast {
+      position: fixed; bottom: 20px; right: 16px; left: 16px; max-width: 360px; margin: 0 auto; background: var(--navy-950); color: #ffffff; padding: 10px 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); font-size: 0.78rem; font-weight: 600; display: flex; align-items: center; gap: 8px; z-index: 1000; transform: translateY(100px); opacity: 0; transition: all 0.3s;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="ucsd-logo-badge">UCSD</div>
+        <div class="header-titles">
+          <h1>Class Schedule & Campus Maps</h1>
+          <p>Fall 2026 Registration | Kyaw Soe Lwin</p>
+        </div>
+      </div>
+      <div class="student-badge-bar">
+        <div class="stat-pill">Units: <strong id="totalUnitsBadge">12.0 Units</strong></div>
+        <div class="stat-pill" style="background:rgba(16, 185, 129, 0.2); color:#a7f3d0;">
+          <strong>● Financial Aid Met</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main App Container -->
+  <main class="main-app-container">
+
+    <!-- Plan Selector & Actions Bar -->
+    <div class="top-plan-bar">
+      <div class="plan-pills-row" id="planPillsRow">
+        <!-- Dynamically rendered -->
+      </div>
+      <div class="action-buttons-group">
+        <button class="btn-action btn-gold" onclick="copyAllBookingIds()">
+          📋 Copy IDs
+        </button>
+        <button class="btn-action btn-blue" onclick="promptSaveCurrentPlan()">
+          💾 Save Plan
+        </button>
+        <button class="btn-action btn-gray" onclick="openCompareModal()">
+          🔄 Compare
+        </button>
+        <button class="btn-action btn-gray" onclick="exportICalendar()">
+          📅 Export .ICS
+        </button>
+      </div>
+    </div>
+
+    <!-- BIG VISUAL WEEKLY CALENDAR CARD -->
+    <section class="calendar-card">
+      <div class="calendar-card-header">
+        <h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Weekly Class Timetable (Tap Any Class for Google Maps)
+        </h2>
+        <div class="calendar-status-badge" id="calendarStatusText">
+          ● 0 Conflicts Confirmed
+        </div>
+      </div>
+
+      <!-- Touch-Scrollable Schedule Grid Matrix -->
+      <div class="calendar-grid-scroll-wrap">
+        <div class="schedule-grid-matrix" id="scheduleGridMatrix">
+          <div class="grid-head-cell time-head-cell">Time</div>
+          <div class="grid-head-cell">Monday</div>
+          <div class="grid-head-cell">Tuesday</div>
+          <div class="grid-head-cell">Wednesday</div>
+          <div class="grid-head-cell">Thursday</div>
+          <div class="grid-head-cell">Friday</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSE SECTION CUSTOMIZER CARD -->
+    <section class="customizer-card">
+      <div class="customizer-header">
+        <h3 id="customizerTitle">DSC-010: Principles of Data Science (4.0 Units)</h3>
+        <span style="font-size:0.72rem; color:var(--text-muted);">Tap room to view address & map</span>
+      </div>
+
+      <!-- 5 Course Tabs -->
+      <div class="course-tabs-scroll">
+        <button class="tab-course-btn dsc10 active" onclick="switchCourseTab('dsc10')" id="cTab_dsc10">
+          <span class="tab-c-code">DSC 10</span>
+          <span class="tab-c-dot" id="dot_dsc10">✓ Selected</span>
+        </button>
+        <button class="tab-course-btn cogs9" onclick="switchCourseTab('cogs9')" id="cTab_cogs9">
+          <span class="tab-c-code">COGS 9</span>
+          <span class="tab-c-dot" id="dot_cogs9">✓ Selected</span>
+        </button>
+        <button class="tab-course-btn cogs14a" onclick="switchCourseTab('cogs14a')" id="cTab_cogs14a">
+          <span class="tab-c-code">COGS 14A</span>
+          <span class="tab-c-dot" id="dot_cogs14a">✓ Selected</span>
+        </button>
+        <button class="tab-course-btn wcwp" onclick="switchCourseTab('wcwp')" id="cTab_wcwp">
+          <span class="tab-c-code">WCWP 100</span>
+          <span class="tab-c-dot" id="dot_wcwp">✓ Selected</span>
+        </button>
+        <button class="tab-course-btn math183" onclick="switchCourseTab('math183')" id="cTab_math183">
+          <span class="tab-c-code">MATH 183</span>
+          <span class="tab-c-dot" id="dot_math183">○ Optional</span>
+        </button>
+      </div>
+
+      <!-- Section Cards List -->
+      <div class="section-options-list" id="sectionOptionsList">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- POPUP MODAL: CAMPUS LOCATION & GOOGLE MAPS -->
+  <div class="loc-modal-overlay" id="locModalOverlay" onclick="closeLocModal()">
+    <div class="loc-modal-card" onclick="event.stopPropagation()">
+      <div class="loc-modal-head">
+        <div>
+          <h2 id="modalTitle">DSC 10 (Lecture)</h2>
+          <p id="modalSub">Principles of Data Science | Janine Tiefenbruck</p>
+        </div>
+        <button class="loc-modal-close-btn" onclick="closeLocModal()">✕</button>
+      </div>
+      <div class="loc-modal-content">
+
+        <!-- Building & Address Box -->
+        <div class="loc-info-box">
+          <div class="loc-info-bldg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span id="modalBldgName">Warren Lecture Hall (WLH)</span>
+          </div>
+          <div class="loc-info-addr" id="modalBldgAddr">
+            Room 2005, Building #625, Voigt Dr, La Jolla, CA 92093
+          </div>
+          <div class="loc-info-badge" id="modalNeighborTag">
+            Earl Warren College
+          </div>
+        </div>
+
+        <!-- Schedule & Booking Details Table -->
+        <div class="loc-table-box">
+          <div class="loc-t-row">
+            <span class="loc-t-lbl">Days & Times:</span>
+            <span class="loc-t-val" id="modalTimeVal">M, W, F 11:00 AM - 11:50 AM</span>
+          </div>
+          <div class="loc-t-row">
+            <span class="loc-t-lbl">Instructor:</span>
+            <span class="loc-t-val" id="modalInstrVal">Janine Tiefenbruck</span>
+          </div>
+          <div class="loc-t-row">
+            <span class="loc-t-lbl">Section Booking ID:</span>
+            <span class="loc-t-val" style="color:#0284c7; font-family:'JetBrains Mono', monospace;" id="modalIdVal">SE00155360</span>
+          </div>
+        </div>
+
+        <!-- Direct Map & Copy Buttons -->
+        <div class="loc-modal-btn-row">
+          <button class="btn-modal-copy" onclick="copyModalId()">
+            📋 Copy Booking ID
+          </button>
+          <button class="btn-modal-map" onclick="openDirectGoogleMaps()">
+            🗺️ Open Google Maps
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Modal -->
+  <div class="compare-modal-overlay" id="compareModalOverlay" onclick="closeCompareModal()">
+    <div class="compare-modal-card" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:8px;">
+        <h2 style="font-size:1.05rem; font-weight:800; color:var(--navy-900);">🔄 Compare Plans</h2>
+        <button class="loc-modal-close-btn" style="background:#f1f5f9; color:#000;" onclick="closeCompareModal()">✕</button>
+      </div>
+      <div id="compareTableWrap" style="overflow-x:auto;"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <span id="toastText">Copied!</span>
+  </div>
+
+  <script>
+    const UCSD_LOCATIONS = {
+      "WLH 2005": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2005 (2nd Floor)", address: "Voigt Dr & Athena Way, La Jolla, CA 92093", neighborhood: "Earl Warren College", mapsQuery: "Warren Lecture Hall UC San Diego" },
+      "WLH 2110": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2110 (2nd Floor)", address: "Voigt Dr & Athena Way, La Jolla, CA 92093", neighborhood: "Earl Warren College", mapsQuery: "Warren Lecture Hall UC San Diego" },
+      "WLH 2113": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2113 (2nd Floor)", address: "Voigt Dr & Athena Way, La Jolla, CA 92093", neighborhood: "Earl Warren College", mapsQuery: "Warren Lecture Hall UC San Diego" },
+      "FAH 1301": { bldgName: "Franklin Antonio Hall (FAH)", bldgNumber: "Building #395", room: "Auditorium Room 1301", address: "3180 Voigt Dr, La Jolla, CA 92093", neighborhood: "Warren College / Jacobs Engineering", mapsQuery: "Franklin Antonio Hall UC San Diego" },
+      "PCH 109": { bldgName: "Pepper Canyon Hall (PCH)", bldgNumber: "Building #246", room: "Auditorium Room 109", address: "Russell Ln & Voigt Dr, La Jolla, CA 92093", neighborhood: "Sixth College / Central Campus Hub", mapsQuery: "Pepper Canyon Hall UC San Diego" },
+      "PCH 120": { bldgName: "Pepper Canyon Hall (PCH)", bldgNumber: "Building #246", room: "Room 120", address: "Russell Ln & Voigt Dr, La Jolla, CA 92093", neighborhood: "Sixth College / Central Campus Hub", mapsQuery: "Pepper Canyon Hall UC San Diego" },
+      "Catalyst 0125": { bldgName: "Catalyst Building (NTPLLN)", bldgNumber: "Building #980", room: "Room 0125", address: "9600 Scholars Dr N, La Jolla, CA 92093", neighborhood: "North Torrey Pines (NTPLLN)", mapsQuery: "Catalyst North Torrey Pines UC San Diego" },
+      "SAC 101": { bldgName: "Student Activity Center (SAC)", bldgNumber: "Building #650", room: "Room 101", address: "Voigt Dr (near Canyon Vista Dining), La Jolla, CA 92093", neighborhood: "Earl Warren College", mapsQuery: "Warren Student Activity Center UC San Diego" },
+      "SAC 132": { bldgName: "Student Activity Center (SAC)", bldgNumber: "Building #650", room: "Room 132", address: "Voigt Dr (near Canyon Vista Dining), La Jolla, CA 92093", neighborhood: "Earl Warren College", mapsQuery: "Warren Student Activity Center UC San Diego" },
+      "CENTR 203": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 203 (2nd Floor)", address: "Library Walk & Myers Dr, La Jolla, CA 92093", neighborhood: "University Center / Library Walk", mapsQuery: "Center Hall UC San Diego" },
+      "CENTR 214": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 214 (2nd Floor)", address: "Library Walk & Myers Dr, La Jolla, CA 92093", neighborhood: "University Center / Library Walk", mapsQuery: "Center Hall UC San Diego" },
+      "CENTR 216": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 216 (2nd Floor)", address: "Library Walk & Myers Dr, La Jolla, CA 92093", neighborhood: "University Center / Library Walk", mapsQuery: "Center Hall UC San Diego" },
+      "CENTR 222": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 222 (2nd Floor)", address: "Library Walk & Myers Dr, La Jolla, CA 92093", neighborhood: "University Center / Library Walk", mapsQuery: "Center Hall UC San Diego" },
+      "HSS 1305": { bldgName: "Humanities & Social Sciences (HSS)", bldgNumber: "Building #250", room: "Room 1305", address: "Muir College Dr, La Jolla, CA 92093", neighborhood: "John Muir College", mapsQuery: "Humanities and Social Sciences UC San Diego" },
+      "HSS 1330": { bldgName: "Humanities & Social Sciences (HSS)", bldgNumber: "Building #250", room: "Room 1330", address: "Muir College Dr, La Jolla, CA 92093", neighborhood: "John Muir College", mapsQuery: "Humanities and Social Sciences UC San Diego" },
+      "AP&M B402A": { bldgName: "Applied Physics & Math (AP&M)", bldgNumber: "Building #111", room: "Basement B402A", address: "Muir College Dr, La Jolla, CA 92093", neighborhood: "John Muir College", mapsQuery: "Applied Physics and Mathematics UC San Diego" },
+      "DIB 121": { bldgName: "Design and Innovation Building (DIB)", bldgNumber: "Building #440", room: "Room 121", address: "9510 Gilman Dr, La Jolla, CA 92093", neighborhood: "Pepper Canyon / UC San Diego Trolley", mapsQuery: "Design and Innovation Building UC San Diego" },
+      "CSB 004": { bldgName: "Cognitive Science Building (CSB)", bldgNumber: "Building #350", room: "Room 004", address: "Scholars Dr N, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", mapsQuery: "Cognitive Science Building UC San Diego" },
+      "CSB 005": { bldgName: "Cognitive Science Building (CSB)", bldgNumber: "Building #350", room: "Room 005", address: "Scholars Dr N, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", mapsQuery: "Cognitive Science Building UC San Diego" },
+      "Coalition 117": { bldgName: "Social Sciences Building (Coalition)", bldgNumber: "Building #735", room: "Room 117", address: "Scholars Dr N, La Jolla, CA 92093", neighborhood: "Eleanor Roosevelt College", mapsQuery: "Social Sciences Building UC San Diego" },
+      "Coalition B30": { bldgName: "Social Sciences Building (Coalition)", bldgNumber: "Building #735", room: "Room B30", address: "Scholars Dr N, La Jolla, CA 92093", neighborhood: "Eleanor Roosevelt College", mapsQuery: "Social Sciences Building UC San Diego" }
+    };
+
+    const TSS_DB = {
+      dsc10: [
+        { key: "P003", bookingId: "SE00155360", code: "DSC-010 (P-003-001)", instructor: "Janine Tiefenbruck", statusText: "Waitlist: 13", isWaitlist: true, events: [
+          { type: "Lecture", days: ["M","W","F"], start: "11:00", end: "11:50", room: "WLH 2005", code: "DSC 10 (LE)", title: "Principles of Data Science", colorClass: "dsc10" },
+          { type: "Discussion", days: ["Tu"], start: "17:00", end: "17:50", room: "WLH 2005", code: "DSC 10 (DI)", title: "DSC 10 Discussion", colorClass: "dsc10" },
+          { type: "Laboratory", days: ["F"], start: "16:00", end: "16:50", room: "CENTR 222", code: "DSC 10 (LA)", title: "DSC 10 Lab", colorClass: "dsc10" }
+        ]},
+        { key: "P004", bookingId: "SE00155361", code: "DSC-010 (P-004-001)", instructor: "Peter Chi", statusText: "Waitlist: 8", isWaitlist: true, events: [
+          { type: "Lecture", days: ["M","W","F"], start: "10:00", end: "10:50", room: "HSS 1330", code: "DSC 10 (LE)", title: "Principles of Data Science", colorClass: "dsc10" },
+          { type: "Discussion", days: ["M"], start: "16:00", end: "16:50", room: "CENTR 216", code: "DSC 10 (DI)", title: "DSC 10 Discussion", colorClass: "dsc10" },
+          { type: "Laboratory", days: ["F"], start: "20:00", end: "20:50", room: "CENTR 214", code: "DSC 10 (LA)", title: "DSC 10 Lab", colorClass: "dsc10" }
+        ]},
+        { key: "P001_2", bookingId: "SE00156882", code: "DSC-010 (P-001-002)", instructor: "Janine Tiefenbruck", statusText: "Waitlist: 0 (Fast WL)", isWaitlist: true, events: [
+          { type: "Lecture", days: ["M","W","F"], start: "10:00", end: "10:50", room: "WLH 2005", code: "DSC 10 (LE)", title: "Principles of Data Science", colorClass: "dsc10" },
+          { type: "Discussion", days: ["M"], start: "14:00", end: "14:50", room: "WLH 2005", code: "DSC 10 (DI)", title: "DSC 10 Discussion", colorClass: "dsc10" },
+          { type: "Laboratory", days: ["F"], start: "17:00", end: "17:50", room: "CENTR 214", code: "DSC 10 (LA)", title: "DSC 10 Lab", colorClass: "dsc10" }
+        ]}
+      ],
+      cogs9: [
+        { key: "P001", bookingId: "SE00157837", code: "COGS-009 (P-001-001)", instructor: "Brendan Tomoschuk", statusText: "30 Available (Open)", isWaitlist: false, events: [
+          { type: "Lecture", days: ["M","W","F"], start: "14:00", end: "14:50", room: "FAH 1301", code: "COGS 9 (LE)", title: "Intro to Data Science", colorClass: "cogs9" },
+          { type: "Discussion", days: ["F"], start: "09:00", end: "09:50", room: "Coalition 117", code: "COGS 9 (DI)", title: "COGS 9 Discussion", colorClass: "cogs9" }
+        ]},
+        { key: "P002", bookingId: "SE00157838", code: "COGS-009 (P-001-002)", instructor: "Brendan Tomoschuk", statusText: "37 Available (Open)", isWaitlist: false, events: [
+          { type: "Lecture", days: ["M","W","F"], start: "14:00", end: "14:50", room: "FAH 1301", code: "COGS 9 (LE)", title: "Intro to Data Science", colorClass: "cogs9" },
+          { type: "Discussion", days: ["F"], start: "10:00", end: "10:50", room: "Coalition 117", code: "COGS 9 (DI)", title: "COGS 9 Discussion", colorClass: "cogs9" }
+        ]}
+      ],
+      cogs14a: [
+        { key: "P004", bookingId: "SE00153227", code: "COGS-014A (P-001-004)", instructor: "Sarah Creel", statusText: "23 Available (Open)", isWaitlist: false, events: [
+          { type: "Lecture", days: ["Tu","Th"], start: "09:30", end: "10:50", room: "Catalyst 0125", code: "COGS 14A (LE)", title: "Intro to Research Methods", colorClass: "cogs14a" },
+          { type: "Laboratory", days: ["W"], start: "15:00", end: "15:50", room: "CSB 004", code: "COGS 14A (LA)", title: "COGS 14A Lab", colorClass: "cogs14a" }
+        ]},
+        { key: "P006", bookingId: "SE00153229", code: "COGS-014A (P-001-006)", instructor: "Sarah Creel", statusText: "36 Available (Open)", isWaitlist: false, events: [
+          { type: "Lecture", days: ["Tu","Th"], start: "09:30", end: "10:50", room: "Catalyst 0125", code: "COGS 14A (LE)", title: "Intro to Research Methods", colorClass: "cogs14a" },
+          { type: "Laboratory", days: ["W"], start: "17:00", end: "17:50", room: "DIB 121", code: "COGS 14A (LA)", title: "COGS 14A Lab", colorClass: "cogs14a" }
+        ]}
+      ],
+      wcwp: [
+        { key: "P001", bookingId: "SE00155691", code: "WCWP-100 (P-001-001)", instructor: "Tricia Ornelas", statusText: "16 Available (Open)", isWaitlist: false, events: [
+          { type: "Lecture", days: ["Tu","Th"], start: "11:00", end: "12:20", room: "SAC 101", code: "WCWP 100", title: "Academic Writing Seminar", colorClass: "wcwp100" }
+        ]},
+        { key: "P004", bookingId: "SE00155694", code: "WCWP-100 (P-004-001)", instructor: "Mark Young", statusText: "11 Available (Open)", isWaitlist: false, events: [
+          { type: "Lecture", days: ["Tu","Th"], start: "11:00", end: "12:20", room: "SAC 132", code: "WCWP 100", title: "Academic Writing Seminar", colorClass: "wcwp100" }
+        ]},
+        { key: "P005", bookingId: "SE00155695", code: "WCWP-100 (P-005-001)", instructor: "Mark Young", statusText: "17 Available (Open)", isWaitlist: false, events: [
+          { type: "Lecture", days: ["Tu","Th"], start: "14:00", end: "15:20", room: "SAC 132", code: "WCWP 100", title: "Academic Writing Seminar", colorClass: "wcwp100" }
+        ]}
+      ],
+      math183: [
+        { key: "P006", bookingId: "SE00152819", code: "MATH-183 (P-001-006)", instructor: "Denise Rava", statusText: "2 Available (Open!)", isWaitlist: false, events: [
+          { type: "Lecture", days: ["M","W","F"], start: "13:00", end: "13:50", room: "PCH 109", code: "MATH 183 (LE)", title: "Statistical Methods", colorClass: "math183" },
+          { type: "Discussion", days: ["M"], start: "18:00", end: "18:50", room: "CENTR 203", code: "MATH 183 (DI)", title: "MATH 183 Discussion", colorClass: "math183" }
+        ]}
+      ]
+    };
+
+    const BUILTIN_PRESETS = {
+      A: { name: "★ Plan A (16U)", dsc10: "P003", cogs9: "P001", cogs14a: "P004", wcwp: "P001", math183: null },
+      B: { name: "Plan B (Backup 1)", dsc10: "P004", cogs9: "P002", cogs14a: "P006", wcwp: "P004", math183: null },
+      C: { name: "Plan C (Fast WL)", dsc10: "P001_2", cogs9: "P001", cogs14a: "P006", wcwp: "P005", math183: null },
+      D: { name: "★ Plan D (+ MATH 183)", dsc10: "P003", cogs9: "P001", cogs14a: "P004", wcwp: "P001", math183: "P006" }
+    };
+
+    let customPlans = JSON.parse(localStorage.getItem("ucsd_custom_plans") || "{}");
+    let activeCourseTab = "dsc10";
+    let currentPlanKey = "A";
+    let selectedKeys = { dsc10: "P003", cogs9: "P001", cogs14a: "P004", wcwp: "P001", math183: null };
+    let currentModalQuery = "";
+    let currentModalBookingId = "";
+
+    const DAYS_MAP = { "M": 2, "Tu": 3, "W": 4, "Th": 5, "F": 6 };
+    const TIME_SLOTS = [
+      { label: "09:00 AM", time: 9.0 },
+      { label: "10:00 AM", time: 10.0 },
+      { label: "11:00 AM", time: 11.0 },
+      { label: "12:00 PM", time: 12.0 },
+      { label: "01:00 PM", time: 13.0 },
+      { label: "02:00 PM", time: 14.0 },
+      { label: "03:00 PM", time: 15.0 },
+      { label: "04:00 PM", time: 16.0 },
+      { label: "05:00 PM", time: 17.0 },
+      { label: "06:00 PM", time: 18.0 },
+      { label: "07:00 PM", time: 19.0 },
+      { label: "08:00 PM", time: 20.0 }
+    ];
+
+    function timeToHours(t) {
+      const [h, m] = t.split(":").map(Number);
+      return h + m / 60;
+    }
+
+    function renderPlanPills() {
+      const container = document.getElementById("planPillsRow");
+      container.innerHTML = `<span style="font-size:0.74rem; font-weight:800; color:var(--navy-800); white-space:nowrap;">PLANS:</span>`;
+
+      for (const [k, p] of Object.entries(BUILTIN_PRESETS)) {
+        const btn = document.createElement("button");
+        btn.className = `plan-btn ${currentPlanKey === k ? 'active' : ''}`;
+        btn.id = `btnPlan_${k}`;
+        btn.innerText = p.name;
+        if (k === 'D') {
+          btn.style.borderColor = "#f43f5e";
+          btn.style.color = currentPlanKey === 'D' ? "#fff" : "#be123c";
+          if (currentPlanKey === 'D') btn.style.background = "#e11d48";
+        }
+        btn.onclick = () => loadPlan(k);
+        container.appendChild(btn);
+      }
+
+      for (const [k, p] of Object.entries(customPlans)) {
+        const btn = document.createElement("button");
+        btn.className = `plan-btn my-plan ${currentPlanKey === k ? 'active' : ''}`;
+        btn.id = `btnPlan_${k}`;
+        btn.innerHTML = `
+          <span>⭐ ${p.name}</span>
+          <span class="del-btn" title="Delete" onclick="deleteCustomPlan('${k}', event)">✕</span>
+        `;
+        btn.onclick = () => loadCustomPlan(k);
+        container.appendChild(btn);
+      }
+    }
+
+    function loadPlan(k) {
+      currentPlanKey = k;
+      const p = BUILTIN_PRESETS[k];
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, wcwp: p.wcwp, math183: p.math183 };
+      renderPlanPills();
+      renderSectionCards();
+      renderCalendarGrid();
+      updateDots();
+      showToast(`Loaded ${p.name}`);
+    }
+
+    function loadCustomPlan(k) {
+      currentPlanKey = k;
+      const p = customPlans[k];
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, wcwp: p.wcwp, math183: p.math183 || null };
+      renderPlanPills();
+      renderSectionCards();
+      renderCalendarGrid();
+      updateDots();
+      showToast(`Loaded ⭐ ${p.name}`);
+    }
+
+    function promptSaveCurrentPlan() {
+      const defaultName = `My Plan ${Object.keys(customPlans).length + 1}`;
+      const name = prompt("Enter a name for your custom plan:", defaultName);
+      if (!name) return;
+
+      const planKey = "custom_" + Date.now();
+      customPlans[planKey] = {
+        name: name.trim(),
+        dsc10: selectedKeys.dsc10,
+        cogs9: selectedKeys.cogs9,
+        cogs14a: selectedKeys.cogs14a,
+        wcwp: selectedKeys.wcwp,
+        math183: selectedKeys.math183
+      };
+
+      localStorage.setItem("ucsd_custom_plans", JSON.stringify(customPlans));
+      currentPlanKey = planKey;
+      renderPlanPills();
+      showToast(`Saved "${name}"!`);
+    }
+
+    function deleteCustomPlan(k, e) {
+      if (e) e.stopPropagation();
+      if (!confirm(`Delete "${customPlans[k].name}"?`)) return;
+      delete customPlans[k];
+      localStorage.setItem("ucsd_custom_plans", JSON.stringify(customPlans));
+      if (currentPlanKey === k) loadPlan('A');
+      else renderPlanPills();
+      showToast("Plan deleted.");
+    }
+
+    function switchCourseTab(tabKey) {
+      activeCourseTab = tabKey;
+      document.querySelectorAll(".tab-course-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById(`cTab_${tabKey}`).classList.add("active");
+
+      const titles = {
+        dsc10: "DSC-010: Principles of Data Science (4.0 Units)",
+        cogs9: "COGS-009: Introduction to Data Science (4.0 Units)",
+        cogs14a: "COGS-014A: Introduction to Research Methods (4.0 Units)",
+        wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units)",
+        math183: "MATH-183: Statistical Methods (4.0 Units)"
+      };
+      document.getElementById("customizerTitle").innerText = titles[tabKey];
+      renderSectionCards();
+    }
+
+    function getSelectedSectionsArray() {
+      const arr = [];
+      for (const [course, key] of Object.entries(selectedKeys)) {
+        if (!key) continue;
+        const item = TSS_DB[course].find(x => x.key === key);
+        if (item) arr.push({ ...item, courseKey: course });
+      }
+      return arr;
+    }
+
+    function renderSectionCards() {
+      const container = document.getElementById("sectionOptionsList");
+      container.innerHTML = "";
+
+      const options = TSS_DB[activeCourseTab];
+      options.forEach(opt => {
+        const isSelected = (selectedKeys[activeCourseTab] === opt.key);
+
+        const card = document.createElement("div");
+        card.className = `sec-card ${isSelected ? 'selected' : ''}`;
+
+        let schHtml = "";
+        opt.events.forEach(ev => {
+          schHtml += `
+            <div class="sec-sch-item">
+              <span><strong>${ev.type} (${ev.days.join(",")}):</strong> ${ev.start} - ${ev.end}</span>
+              <span class="sec-room-link" onclick="openLocationPopup('${ev.code}', '${ev.title}', '${ev.type}', '${opt.instructor}', '${ev.days.join(",")}', '${ev.start}', '${ev.end}', '${ev.room}', '${opt.bookingId}', event)">📍 ${ev.room}</span>
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="sec-card-top">
+            <span class="sec-tag">
+              ${opt.code}
+              <span class="sec-booking-id">${opt.bookingId}</span>
+            </span>
+            <span class="sec-avail ${opt.isWaitlist ? 'wl' : 'open'}">
+              ${opt.statusText}
+            </span>
+          </div>
+          <div style="font-size:0.72rem; color:var(--text-muted);">
+            👤 Instructor: <strong style="color:var(--navy-800);">${opt.instructor}</strong>
+          </div>
+          <div class="sec-sch-box">
+            ${schHtml}
+          </div>
+          <div class="sec-card-bottom">
+            <span style="font-size:0.68rem; color:var(--success); font-weight:700;">✓ Conflict-Free</span>
+            <button class="sec-select-btn" onclick="selectSection('${activeCourseTab}', '${opt.key}', event)">
+              ${isSelected ? '★ Selected' : (activeCourseTab === 'math183' ? '+ Add MATH 183' : 'Choose Section')}
+            </button>
+          </div>
+        `;
+
+        card.onclick = (e) => {
+          selectSection(activeCourseTab, opt.key, e);
+        };
+
+        container.appendChild(card);
+      });
+    }
+
+    function selectSection(courseKey, itemKey, e) {
+      if (e) e.stopPropagation();
+      if (courseKey === 'math183' && selectedKeys.math183 === itemKey) {
+        selectedKeys.math183 = null;
+        showToast("Removed MATH 183");
+      } else {
+        selectedKeys[courseKey] = itemKey;
+        showToast(`Selected ${courseKey.toUpperCase()}`);
+      }
+
+      currentPlanKey = "custom_unsaved";
+      renderPlanPills();
+      renderSectionCards();
+      renderCalendarGrid();
+      updateDots();
+    }
+
+    function updateDots() {
+      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'wcwp', 'math183']) {
+        const dotElem = document.getElementById(`dot_${crs}`);
+        if (selectedKeys[crs]) {
+          dotElem.innerText = "✓ Selected";
+          dotElem.style.color = "var(--success)";
+        } else {
+          dotElem.innerText = (crs === 'math183') ? "○ Optional" : "○ Not selected";
+          dotElem.style.color = (crs === 'math183') ? "var(--text-muted)" : "var(--danger)";
+        }
+      }
+    }
+
+    function buildEmptyGrid() {
+      const grid = document.getElementById("scheduleGridMatrix");
+      while (grid.children.length > 6) {
+        grid.removeChild(grid.lastChild);
+      }
+      TIME_SLOTS.forEach((slot, rowIdx) => {
+        const timeCell = document.createElement("div");
+        timeCell.className = "time-head-cell";
+        timeCell.innerText = slot.label;
+        timeCell.style.gridRow = `${rowIdx + 2}`;
+        timeCell.style.gridColumn = "1";
+        grid.appendChild(timeCell);
+
+        for (let dayCol = 2; dayCol <= 6; dayCol++) {
+          const cell = document.createElement("div");
+          cell.className = "grid-bg-slot";
+          cell.style.gridRow = `${rowIdx + 2}`;
+          cell.style.gridColumn = `${dayCol}`;
+          grid.appendChild(cell);
+        }
+      });
+    }
+
+    function renderCalendarGrid() {
+      buildEmptyGrid();
+      const grid = document.getElementById("scheduleGridMatrix");
+
+      const sections = getSelectedSectionsArray();
+      const allEvents = [];
+
+      sections.forEach(sec => {
+        sec.events.forEach(ev => {
+          allEvents.push({ ...ev, bookingId: sec.bookingId, parentCode: sec.code, instructor: sec.instructor });
+        });
+      });
+
+      const totalUnits = sections.length * 4;
+      document.getElementById("totalUnitsBadge").innerText = `${totalUnits}.0 Units`;
+
+      allEvents.forEach(item => {
+        const startH = timeToHours(item.start);
+        const endH = timeToHours(item.end);
+
+        item.days.forEach(day => {
+          const colIdx = DAYS_MAP[day];
+          if (!colIdx) return;
+
+          const baseRow = 2;
+          const startOffset = startH - 9.0;
+          const duration = endH - startH;
+
+          const startRow = baseRow + Math.floor(startOffset);
+          const heightPx = Math.max(32, duration * 48);
+
+          const block = document.createElement("div");
+          block.className = `class-event-block ${item.colorClass}`;
+          block.style.gridColumn = `${colIdx}`;
+          block.style.gridRow = `${startRow}`;
+          block.style.marginTop = `${(startOffset % 1) * 48}px`;
+          block.style.height = `${heightPx}px`;
+
+          block.innerHTML = `
+            <div class="ev-top-row">
+              <span class="ev-code">${item.code}</span>
+              <span class="ev-type-badge">${item.type}</span>
+            </div>
+            <div class="ev-title">${item.title}</div>
+            <div class="ev-bottom-row">
+              <span class="ev-room-tag">📍 ${item.room}</span>
+              <span>⏰ ${item.start}-${item.end}</span>
+            </div>
+          `;
+
+          block.onclick = (e) => {
+            e.stopPropagation();
+            openLocationPopup(item.code, item.title, item.type, item.instructor, item.days.join(", "), item.start, item.end, item.room, item.bookingId);
+          };
+
+          grid.appendChild(block);
+        });
+      });
+    }
+
+    /* POPUP MODAL HANDLERS */
+    function openLocationPopup(code, title, type, instructor, days, start, end, room, bookingId, e) {
+      if (e) e.stopPropagation();
+
+      const loc = UCSD_LOCATIONS[room] || {
+        bldgName: room,
+        bldgNumber: "UC San Diego Main Campus",
+        room: room,
+        address: "9500 Gilman Dr, La Jolla, CA 92093",
+        neighborhood: "Earl Warren College",
+        mapsQuery: room + " UC San Diego"
+      };
+
+      document.getElementById("modalTitle").innerText = `${code} (${type})`;
+      document.getElementById("modalSub").innerText = `${title} • Prof. ${instructor}`;
+      document.getElementById("modalBldgName").innerText = `${loc.bldgName} — ${loc.room}`;
+      document.getElementById("modalBldgAddr").innerText = `${loc.bldgNumber}, ${loc.address}`;
+      document.getElementById("modalNeighborTag").innerText = `📍 Neighborhood: ${loc.neighborhood}`;
+      document.getElementById("modalTimeVal").innerText = `${days} ${start} - ${end}`;
+      document.getElementById("modalInstrVal").innerText = instructor;
+      document.getElementById("modalIdVal").innerText = bookingId;
+
+      currentModalBookingId = bookingId;
+      currentModalQuery = `${loc.bldgName} ${loc.address}`;
+
+      document.getElementById("locModalOverlay").classList.add("show");
+    }
+
+    function closeLocModal() {
+      document.getElementById("locModalOverlay").classList.remove("show");
+    }
+
+    function openDirectGoogleMaps() {
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentModalQuery)}`;
+      window.open(url, '_blank') || (window.location.href = url);
+    }
+
+    function copyModalId() {
+      navigator.clipboard.writeText(currentModalBookingId).then(() => {
+        showToast(`Copied Booking ID: ${currentModalBookingId}`);
+      });
+    }
+
+    function copyAllBookingIds() {
+      const sections = getSelectedSectionsArray();
+      const ids = sections.map(s => `${s.code}: ${s.bookingId}`).join("\n");
+      navigator.clipboard.writeText(ids).then(() => {
+        showToast("All Section Booking IDs copied!");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toastText").innerText = msg;
+      toast.classList.add("show");
+      setTimeout(() => { toast.classList.remove("show"); }, 2400);
+    }
+
+    function exportICalendar() {
+      const sections = getSelectedSectionsArray();
+      let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//UCSD Fall 2026 Simulator//EN\nCALSCALE:GREGORIAN\n";
+      const dayToIcal = { "M": "MO", "Tu": "TU", "W": "WE", "Th": "TH", "F": "FR" };
+
+      sections.forEach((sec, sIdx) => {
+        sec.events.forEach((ev, eIdx) => {
+          const byDays = ev.days.map(d => dayToIcal[d]).join(",");
+          const startClean = ev.start.replace(":", "") + "00";
+          const endClean = ev.end.replace(":", "") + "00";
+          const loc = UCSD_LOCATIONS[ev.room] || { bldgName: ev.room, address: "9500 Gilman Dr" };
+
+          ics += "BEGIN:VEVENT\n";
+          ics += `UID:ucsd-fall2026-${sec.bookingId}-${sIdx}-${eIdx}@ucsd.edu\n`;
+          ics += `SUMMARY:${ev.code} - ${ev.title}\n`;
+          ics += `LOCATION:${loc.bldgName} (${ev.room}), ${loc.address}\n`;
+          ics += `DESCRIPTION:Instructor: ${sec.instructor} | Booking ID: ${sec.bookingId}\n`;
+          ics += `DTSTART;TZID=America/Los_Angeles:20260928T${startClean}\n`;
+          ics += `DTEND;TZID=America/Los_Angeles:20260928T${endClean}\n`;
+          ics += `RRULE:FREQ=WEEKLY;UNTIL=20261211T235959Z;BYDAY=${byDays}\n`;
+          ics += "END:VEVENT\n";
+        });
+      });
+
+      ics += "END:VCALENDAR";
+
+      const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "UCSD_Fall_2026_Schedule.ics";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("Downloaded Calendar (.ics)!");
+    }
+
+    function openCompareModal() {
+      const container = document.getElementById("compareTableWrap");
+      const allPlans = { ...BUILTIN_PRESETS, ...customPlans };
+
+      let html = `
+        <table class="compare-tbl">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>DSC 10</th>
+              <th>COGS 9</th>
+              <th>COGS 14A</th>
+              <th>WCWP</th>
+              <th>MATH 183</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      for (const [k, p] of Object.entries(allPlans)) {
+        const dsc = TSS_DB.dsc10.find(x => x.key === p.dsc10);
+        const c9 = TSS_DB.cogs9.find(x => x.key === p.cogs9);
+        const c14 = TSS_DB.cogs14a.find(x => x.key === p.cogs14a);
+        const wc = TSS_DB.wcwp.find(x => x.key === p.wcwp);
+        const m183 = p.math183 ? TSS_DB.math183.find(x => x.key === p.math183) : null;
+
+        html += `
+          <tr>
+            <td><strong>${p.name}</strong><br><button class="sec-select-btn" onclick="applyPlanAndClose('${k}')">Apply</button></td>
+            <td>${dsc ? dsc.code : '—'}</td>
+            <td>${c9 ? c9.code : '—'}</td>
+            <td>${c14 ? c14.code : '—'}</td>
+            <td>${wc ? wc.code : '—'}</td>
+            <td>${m183 ? m183.code : '—'}</td>
+          </tr>
+        `;
+      }
+
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+      document.getElementById("compareModalOverlay").classList.add("show");
+    }
+
+    function applyPlanAndClose(k) {
+      if (BUILTIN_PRESETS[k]) loadPlan(k);
+      else if (customPlans[k]) loadCustomPlan(k);
+      closeCompareModal();
+    }
+
+    function closeCompareModal() {
+      document.getElementById("compareModalOverlay").classList.remove("show");
+    }
+
+    window.onload = () => {
+      renderPlanPills();
+      switchCourseTab('dsc10');
+      renderCalendarGrid();
+      updateDots();
+    };
+  </script>
+</body>
+</html>
