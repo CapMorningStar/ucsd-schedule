@@ -595,9 +595,14 @@
         </div>
       </div>
 
-      <div class="status-badge-bar">
+            <div class="status-badge-bar" style="display:flex; align-items:center; gap:10px;">
+        <div style="display:flex; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); border-radius:999px; padding:3px; gap:3px;">
+          <button id="btnThemeDark" onclick="switchTheme('dark')" style="background:#00f0ff; color:#000000; border:none; padding:5px 13px; border-radius:999px; font-weight:800; font-size:0.74rem; font-family:var(--font-mono); cursor:pointer; transition:all 0.2s;">🌌 Cyber Dark</button>
+          <button id="btnThemeApple" onclick="switchTheme('apple-light')" style="background:transparent; color:#94a3b8; border:none; padding:5px 13px; border-radius:999px; font-weight:800; font-size:0.74rem; font-family:var(--font-mono); cursor:pointer; transition:all 0.2s;">🍎 Apple Light</button>
+        </div>
         <div class="status-pill" id="unitsPill">12.0 Units</div>
       </div>
+    </div>
     </div>
   </header>
 
