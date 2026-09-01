@@ -819,10 +819,13 @@
         <!-- Direct Map & Copy Buttons -->
         <div class="loc-modal-btn-row">
           <button class="btn-modal-copy" onclick="copyModalId()">
-            📋 Copy Booking ID
+            📋 Copy ID
+          </button>
+          <button class="btn-modal-map" style="background:#000000;" onclick="openDirectAppleMaps()">
+            🍎 Apple Maps
           </button>
           <button class="btn-modal-map" onclick="openDirectGoogleMaps()">
-            🗺️ Open Google Maps
+            🗺️ Google Maps
           </button>
         </div>
 
@@ -1272,6 +1275,11 @@
 
     function openDirectGoogleMaps() {
       const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentModalQuery)}`;
+      window.open(url, '_blank') || (window.location.href = url);
+    }
+
+    function openDirectAppleMaps() {
+      const url = `https://maps.apple.com/?q=${encodeURIComponent(currentModalQuery)}`;
       window.open(url, '_blank') || (window.location.href = url);
     }
 
