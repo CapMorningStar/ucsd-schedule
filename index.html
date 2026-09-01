@@ -58,6 +58,47 @@
       --font-mono: 'JetBrains Mono', monospace;
     }
 
+    
+    /* =========================================================================
+       THEME 2: APPLE SPATIAL LIGHT (Clean Frosted Glass & Pastel Accents)
+       ========================================================================= */
+    body.theme-apple-light {
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-surface-solid: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --border-subtle: #cbd5e1;
+      --border-glow: rgba(2, 132, 199, 0.3);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent-cyan: #0284c7;
+      --accent-purple: #7c3aed;
+      --accent-gold: #d97706;
+      --accent-rose: #e11d48;
+      --accent-green: #059669;
+
+      --dsc10-color: #0284c7;
+      --dsc10-bg: #e0f2fe;
+      --dsc10-border: #7dd3fc;
+
+      --cogs9-color: #7c3aed;
+      --cogs9-bg: #f3e8ff;
+      --cogs9-border: #c084fc;
+
+      --cogs14a-color: #d97706;
+      --cogs14a-bg: #fef3c7;
+      --cogs14a-border: #fcd34d;
+
+      --wcwp-color: #0d9488;
+      --wcwp-bg: #ccfbf1;
+      --wcwp-border: #5eead4;
+
+      --math183-color: #e11d48;
+      --math183-bg: #ffe4e6;
+      --math183-border: #fda4af;
+      --shadow-glow: 0 8px 32px rgba(2, 132, 199, 0.08);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
@@ -1198,6 +1239,25 @@
 
     function openCompareModal() {
       showToast("Opening Plan Comparison...");
+    }
+
+    
+    function switchTheme(mode) {
+      if (mode === 'apple-light') {
+        document.body.classList.add('theme-apple-light');
+        document.getElementById('btnThemeDark').style.background = 'transparent';
+        document.getElementById('btnThemeDark').style.color = 'var(--text-muted)';
+        document.getElementById('btnThemeApple').style.background = '#000';
+        document.getElementById('btnThemeApple').style.color = '#fff';
+        showToast("Switched to Apple Spatial Light Theme!");
+      } else {
+        document.body.classList.remove('theme-apple-light');
+        document.getElementById('btnThemeDark').style.background = 'var(--accent-cyan)';
+        document.getElementById('btnThemeDark').style.color = '#000';
+        document.getElementById('btnThemeApple').style.background = 'transparent';
+        document.getElementById('btnThemeApple').style.color = 'var(--text-muted)';
+        showToast("Switched to Cyber Dark Theme!");
+      }
     }
 
     window.onload = () => {
