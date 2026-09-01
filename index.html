@@ -5,38 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#090d16">
+  <meta name="theme-color" content="#050811">
   <title>UCSD Class Schedule & Campus Map Studio | Fall 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     /* =========================================================================
-       DYNAMIC TECH COMPANY THEMES (ANTIGRAVITY × NOTHING × APPLE)
+       MASTER THEME: ANTIGRAVITY OBSIDIAN & NEON GLASS
        ========================================================================= */
     :root {
-      /* Theme 1: Antigravity Cyber (Default) */
-      --bg-base: #090d16;
-      --bg-surface: rgba(18, 26, 43, 0.75);
-      --bg-surface-solid: #121a2b;
-      --bg-card: rgba(26, 38, 63, 0.65);
-      --bg-glass: rgba(15, 23, 42, 0.75);
-      --border-glow: rgba(0, 240, 255, 0.22);
-      --border-subtle: rgba(255, 255, 255, 0.1);
+      --bg-base: #050811;
+      --bg-surface: rgba(13, 20, 36, 0.82);
+      --bg-surface-solid: #0d1424;
+      --bg-card: rgba(18, 28, 49, 0.72);
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-glow: rgba(0, 240, 255, 0.28);
       
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --text-glow: #00f0ff;
       
       --accent-cyan: #00f0ff;
       --accent-purple: #a855f7;
-      --accent-gold: #ffcd00;
+      --accent-gold: #fbbf24;
       --accent-rose: #f43f5e;
       --accent-green: #10b981;
 
-      --dsc10-color: #38bdf8;
-      --dsc10-bg: rgba(56, 189, 248, 0.12);
-      --dsc10-border: rgba(56, 189, 248, 0.4);
+      --dsc10-color: #00f0ff;
+      --dsc10-bg: rgba(0, 240, 255, 0.12);
+      --dsc10-border: rgba(0, 240, 255, 0.4);
 
       --cogs9-color: #c084fc;
       --cogs9-bg: rgba(192, 132, 252, 0.12);
@@ -50,9 +47,9 @@
       --wcwp-bg: rgba(45, 212, 191, 0.12);
       --wcwp-border: rgba(45, 212, 191, 0.4);
 
-      --math183-color: #fb7185;
-      --math183-bg: rgba(251, 113, 133, 0.12);
-      --math183-border: rgba(251, 113, 133, 0.4);
+      --math183-color: #f43f5e;
+      --math183-bg: rgba(244, 63, 94, 0.12);
+      --math183-border: rgba(244, 63, 94, 0.4);
 
       --radius-lg: 20px;
       --radius-md: 14px;
@@ -61,104 +58,29 @@
       --font-mono: 'JetBrains Mono', monospace;
     }
 
-    /* Theme 2: Nothing OS Glyph (Monochrome Dot-Matrix) */
-    body.theme-nothing {
-      --bg-base: #000000;
-      --bg-surface: #111111;
-      --bg-surface-solid: #161616;
-      --bg-card: #1c1c1c;
-      --bg-glass: #181818;
-      --border-glow: rgba(255, 255, 255, 0.25);
-      --border-subtle: #333333;
-      --text-main: #ffffff;
-      --text-muted: #888888;
-      --text-glow: #ffffff;
-      --accent-cyan: #ffffff;
-      --accent-purple: #e0e0e0;
-      --accent-gold: #ffffff;
-      --accent-rose: #ff003c;
-      --accent-green: #ffffff;
-      
-      --dsc10-color: #ffffff;
-      --dsc10-bg: #222222;
-      --dsc10-border: #555555;
-
-      --cogs9-color: #dddddd;
-      --cogs9-bg: #222222;
-      --cogs9-border: #555555;
-
-      --cogs14a-color: #ffffff;
-      --cogs14a-bg: #222222;
-      --cogs14a-border: #555555;
-
-      --wcwp-color: #cccccc;
-      --wcwp-bg: #222222;
-      --wcwp-border: #555555;
-
-      --math183-color: #ff003c;
-      --math183-bg: rgba(255, 0, 60, 0.15);
-      --math183-border: #ff003c;
-    }
-
-    /* Theme 3: Apple Spatial Light (Frosted White Glass) */
-    body.theme-apple {
-      --bg-base: #f1f5f9;
-      --bg-surface: rgba(255, 255, 255, 0.85);
-      --bg-surface-solid: #ffffff;
-      --bg-card: rgba(255, 255, 255, 0.9);
-      --bg-glass: rgba(255, 255, 255, 0.8);
-      --border-glow: rgba(2, 132, 199, 0.3);
-      --border-subtle: #cbd5e1;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --text-glow: #0284c7;
-      --accent-cyan: #0284c7;
-      --accent-purple: #7c3aed;
-      --accent-gold: #d97706;
-      --accent-rose: #e11d48;
-      --accent-green: #059669;
-
-      --dsc10-color: #0284c7;
-      --dsc10-bg: #e0f2fe;
-      --dsc10-border: #7dd3fc;
-
-      --cogs9-color: #7c3aed;
-      --cogs9-bg: #f3e8ff;
-      --cogs9-border: #c084fc;
-
-      --cogs14a-color: #d97706;
-      --cogs14a-bg: #fef3c7;
-      --cogs14a-border: #fcd34d;
-
-      --wcwp-color: #0d9488;
-      --wcwp-bg: #ccfbf1;
-      --wcwp-border: #5eead4;
-
-      --math183-color: #e11d48;
-      --math183-bg: #ffe4e6;
-      --math183-border: #fda4af;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.06) 0%, transparent 40%);
+      background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
       line-height: 1.4;
       padding-bottom: 50px;
-      transition: background-color 0.3s, color 0.3s;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Spatial Header */
+    /* Master Sticky Header */
     .top-header {
       background: var(--bg-surface);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 12px 18px;
+      padding: 14px 20px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -170,51 +92,33 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
     }
-    .brand-box { display: flex; align-items: center; gap: 10px; }
+    .brand-box { display: flex; align-items: center; gap: 12px; }
     .brand-glyph {
       background: var(--accent-cyan);
       color: #000000;
       font-weight: 800;
       font-family: var(--font-mono);
-      font-size: 0.88rem;
-      padding: 4px 8px;
+      font-size: 0.9rem;
+      padding: 5px 9px;
       border-radius: var(--radius-sm);
       letter-spacing: -0.5px;
-      box-shadow: 0 0 12px var(--border-glow);
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
     }
-    .brand-title h1 { font-size: 1.05rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.3px; }
-    .brand-title p { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); }
+    .brand-title h1 { font-size: 1.1rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.3px; }
+    .brand-title p { font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono); }
 
-    /* Theme Switcher Pill */
-    .theme-switcher-box {
-      display: flex;
-      align-items: center;
-      background: var(--bg-surface-solid);
-      border: 1px solid var(--border-subtle);
-      border-radius: 999px;
-      padding: 3px;
-      gap: 3px;
-    }
-    .theme-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 0.72rem;
+    .status-badge-bar { display: flex; align-items: center; gap: 8px; }
+    .status-pill {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
       font-weight: 700;
-      padding: 5px 10px;
+      color: var(--accent-green);
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 10px;
       border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .theme-btn.active {
-      background: var(--text-main);
-      color: var(--bg-base);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     /* Main Container */
@@ -227,11 +131,11 @@
       gap: 16px;
     }
 
-    /* Glass Control Panel */
+    /* Control Panel */
     .glass-control-panel {
       background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: 12px 16px;
@@ -256,11 +160,11 @@
       background: var(--bg-surface-solid);
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
-      padding: 6px 12px;
+      padding: 7px 13px;
       border-radius: var(--radius-sm);
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 0.74rem;
+      font-size: 0.76rem;
       cursor: pointer;
       white-space: nowrap;
       display: inline-flex;
@@ -273,7 +177,7 @@
       background: var(--accent-cyan);
       color: #000000;
       border-color: var(--accent-cyan);
-      box-shadow: 0 0 14px rgba(0, 240, 255, 0.4);
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
     }
     .btn-plan-pill.custom-plan {
       border-color: var(--accent-purple);
@@ -309,7 +213,7 @@
     .btn-tech.gold { background: var(--accent-gold); color: #000000; font-weight: 800; }
 
     /* =========================================================================
-       FUTURISTIC WEEKLY TIMETABLE CARD
+       MASTER WEEKLY TIMETABLE CARD
        ========================================================================= */
     .timetable-glass-card {
       background: var(--bg-card);
@@ -322,7 +226,7 @@
     }
 
     .timetable-card-head {
-      padding: 12px 18px;
+      padding: 14px 20px;
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
@@ -331,23 +235,12 @@
       gap: 8px;
     }
     .timetable-card-head h2 {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       font-family: 'Space Grotesk', sans-serif;
       display: flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .status-glyph-badge {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent-green);
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 3px 9px;
-      border-radius: 999px;
     }
 
     /* Scrollable Schedule Grid Matrix */
@@ -395,7 +288,7 @@
     /* Class Blocks in Matrix */
     .matrix-event-block {
       border-radius: var(--radius-md);
-      padding: 5px 7px;
+      padding: 5px 8px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -404,7 +297,7 @@
       overflow: hidden;
       z-index: 10;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
     .matrix-event-block:hover, .matrix-event-block:active {
       transform: translateY(-2px) scale(1.01);
@@ -420,10 +313,10 @@
 
     .block-header-row { display: flex; justify-content: space-between; align-items: flex-start; }
     .block-code-text { font-weight: 800; font-size: 0.74rem; font-family: var(--font-mono); }
-    .block-type-pill { font-size: 0.58rem; font-weight: 700; padding: 1px 4px; border-radius: 4px; background: rgba(0,0,0,0.2); }
+    .block-type-pill { font-size: 0.58rem; font-weight: 700; padding: 1px 4px; border-radius: 4px; background: rgba(0,0,0,0.3); }
     .block-title-text { font-size: 0.66rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0.9; }
     .block-footer-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.6rem; font-family: var(--font-mono); }
-    .block-room-badge { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 4px; font-weight: 700; }
+    .block-room-badge { background: rgba(0,0,0,0.3); padding: 2px 5px; border-radius: 4px; font-weight: 700; }
 
     /* Walking Route Time Badge Overlay */
     .walk-route-badge {
@@ -435,13 +328,13 @@
       font-size: 0.58rem;
       font-family: var(--font-mono);
       font-weight: 800;
-      padding: 1px 6px;
+      padding: 2px 7px;
       border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 3px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      gap: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
       cursor: pointer;
     }
 
@@ -454,10 +347,10 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 16px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       box-shadow: var(--shadow-glow);
     }
 
@@ -466,7 +359,7 @@
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
       background: var(--bg-surface-solid);
-      padding: 5px;
+      padding: 6px;
       border-radius: var(--radius-md);
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -487,7 +380,7 @@
     }
     .tab-course-pill.active {
       background: var(--bg-card);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
     }
     .tab-c-code { font-weight: 800; font-size: 0.78rem; font-family: var(--font-mono); }
     .tab-c-dot { font-size: 0.58rem; font-weight: 700; }
@@ -532,7 +425,7 @@
     .sec-id-badge { font-family: var(--font-mono); font-size: 0.7rem; background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; color: var(--accent-cyan); }
     
     .sec-sch-list {
-      background: rgba(0,0,0,0.2);
+      background: rgba(0,0,0,0.25);
       border-radius: var(--radius-sm);
       padding: 6px 10px;
       font-size: 0.7rem;
@@ -551,9 +444,9 @@
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       z-index: 500;
       align-items: center;
       justify-content: center;
@@ -567,7 +460,7 @@
       border-radius: var(--radius-lg);
       max-width: 520px;
       width: 100%;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
       overflow: hidden;
       animation: springPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -577,9 +470,9 @@
     }
 
     .modal-header-banner {
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.18) 0%, rgba(168, 85, 247, 0.18) 100%);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 16px;
+      padding: 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -601,12 +494,12 @@
 
     .modal-body-content { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
     .bldg-address-card {
-      background: rgba(0, 240, 255, 0.05);
+      background: rgba(0, 240, 255, 0.06);
       border: 1.5px solid var(--accent-cyan);
       border-radius: var(--radius-md);
       padding: 14px;
     }
-    .bldg-name-title { font-size: 0.92rem; font-weight: 800; color: var(--accent-cyan); font-family: 'Space Grotesk', sans-serif; margin-bottom: 4px; }
+    .bldg-name-title { font-size: 0.94rem; font-weight: 800; color: var(--accent-cyan); font-family: 'Space Grotesk', sans-serif; margin-bottom: 4px; }
     .bldg-street-addr { font-size: 0.8rem; color: var(--text-main); font-weight: 600; }
     .bldg-neighbor-badge { display: inline-block; margin-top: 6px; background: rgba(0, 240, 255, 0.15); color: var(--accent-cyan); font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; font-family: var(--font-mono); }
 
@@ -619,9 +512,9 @@
 
     .btn-map-action {
       border: none;
-      padding: 13px 10px;
+      padding: 14px 10px;
       border-radius: var(--radius-md);
-      font-size: 0.84rem;
+      font-size: 0.86rem;
       font-weight: 800;
       cursor: pointer;
       display: flex;
@@ -630,7 +523,7 @@
       justify-content: center;
       gap: 4px;
       transition: transform 0.15s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
     .btn-map-action:active { transform: scale(0.96); }
     .btn-map-action.apple { background: #000000; color: #ffffff; border: 1px solid #444; }
@@ -638,7 +531,7 @@
     .btn-map-action.copy { background: var(--bg-surface-solid); color: var(--text-main); border: 1px solid var(--border-subtle); }
 
     .toast-spatial {
-      position: fixed; bottom: 24px; right: 16px; left: 16px; max-width: 380px; margin: 0 auto; background: var(--bg-surface-solid); border: 1px solid var(--accent-cyan); color: var(--text-main); padding: 12px 18px; border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-size: 0.82rem; font-weight: 700; font-family: var(--font-mono); display: flex; align-items: center; gap: 10px; z-index: 1000; transform: translateY(100px); opacity: 0; transition: all 0.3s;
+      position: fixed; bottom: 24px; right: 16px; left: 16px; max-width: 380px; margin: 0 auto; background: var(--bg-surface-solid); border: 1px solid var(--accent-cyan); color: var(--text-main); padding: 12px 18px; border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0,0,0,0.6); font-size: 0.82rem; font-weight: 700; font-family: var(--font-mono); display: flex; align-items: center; gap: 10px; z-index: 1000; transform: translateY(100px); opacity: 0; transition: all 0.3s;
     }
     .toast-spatial.show { transform: translateY(0); opacity: 1; }
 
@@ -648,9 +541,9 @@
     }
   </style>
 </head>
-<body class="theme-antigravity">
+<body>
 
-  <!-- Spatial Header -->
+  <!-- Master Header -->
   <header class="top-header">
     <div class="header-inner">
       <div class="brand-box">
@@ -661,14 +554,12 @@
         </div>
       </div>
 
-      <!-- Theme Switcher & Status -->
-      <div style="display:flex; align-items:center; gap:8px;">
-        <div class="theme-switcher-box">
-          <button class="theme-btn active" onclick="setTheme('antigravity')" id="tBtn_antigravity">🌌 Cyber</button>
-          <button class="theme-btn" onclick="setTheme('nothing')" id="tBtn_nothing">📱 Glyph</button>
-          <button class="theme-btn" onclick="setTheme('apple')" id="tBtn_apple">🍎 Light</button>
+      <!-- Financial Aid Baseline Status -->
+      <div class="status-badge-bar">
+        <div class="status-pill" id="unitsPill">12.0 Units</div>
+        <div class="status-pill" style="background:rgba(16, 185, 129, 0.15); border-color:rgba(16, 185, 129, 0.3); color:#a7f3d0;">
+          ● Financial Aid Met
         </div>
-        <div class="status-glyph-badge" id="unitsPill">12.0 Units</div>
       </div>
     </div>
   </header>
@@ -689,14 +580,14 @@
       </div>
     </div>
 
-    <!-- FUTURISTIC WEEKLY TIMETABLE CARD -->
+    <!-- MASTER WEEKLY TIMETABLE CARD -->
     <section class="timetable-glass-card">
       <div class="timetable-card-head">
         <h2>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          Weekly Class Timetable (Tap Class for Map & Walking Routes)
+          Weekly Class Timetable (Tap Class for Maps & Walking Routes)
         </h2>
-        <div class="status-glyph-badge" id="conflictStatusText">
+        <div class="status-pill" id="conflictStatusText">
           ● 0 Conflicts Confirmed
         </div>
       </div>
@@ -919,13 +810,6 @@
       { label: "08:00 PM", time: 20.0 }
     ];
 
-    function setTheme(themeName) {
-      document.body.className = `theme-${themeName}`;
-      document.querySelectorAll(".theme-btn").forEach(b => b.classList.remove("active"));
-      document.getElementById(`tBtn_${themeName}`).classList.add("active");
-      showToast(`Switched to ${themeName.toUpperCase()} Theme!`);
-    }
-
     function timeToHours(t) {
       const [h, m] = t.split(":").map(Number);
       return h + m / 60;
@@ -1061,7 +945,7 @@
               ${opt.code}
               <span class="sec-id-badge">${opt.bookingId}</span>
             </span>
-            <span class="status-glyph-badge" style="${opt.isWaitlist ? 'color:var(--accent-rose); border-color:var(--accent-rose); background:rgba(244,63,94,0.1);' : ''}">
+            <span class="status-pill" style="${opt.isWaitlist ? 'color:var(--accent-rose); border-color:var(--accent-rose); background:rgba(244,63,94,0.15);' : ''}">
               ${opt.statusText}
             </span>
           </div>
@@ -1147,7 +1031,6 @@
       const totalUnits = sections.length * 4;
       document.getElementById("unitsPill").innerText = `${totalUnits}.0 Units`;
 
-      // Group events by day to calculate walking routes
       const eventsByDay = { "M": [], "Tu": [], "W": [], "Th": [], "F": [] };
 
       allEvents.forEach(item => {
@@ -1195,7 +1078,7 @@
         });
       });
 
-      // Calculate and display walking route time between back-to-back classes
+      // Walking gap time calculation
       for (const [day, dayEvs] of Object.entries(eventsByDay)) {
         dayEvs.sort((a, b) => a.startH - b.startH);
         for (let i = 0; i < dayEvs.length - 1; i++) {
@@ -1319,7 +1202,6 @@
     }
 
     function openCompareModal() {
-      // Retained compare modal handler
       showToast("Opening Plan Comparison...");
     }
 
