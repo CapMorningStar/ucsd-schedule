@@ -580,6 +580,33 @@
       .modal-map-action-grid { grid-template-columns: 1fr; }
       .btn-map-action { flex-direction: row; padding: 14px; }
     }
+  
+    /* NEXT-GEN INTERACTIVE BUTTONS */
+    .btn-tech, .btn-plan-pill, .theme-toggle-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .btn-tech:hover, .btn-plan-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 240, 255, 0.25);
+    }
+    .btn-tech:active, .btn-plan-pill:active {
+      transform: translateY(0) scale(0.96) !important;
+    }
+    .btn-tech.cyan {
+      background: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%) !important;
+      color: #000000 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 4px 14px rgba(0, 240, 255, 0.35);
+    }
+    .btn-tech.gold {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%) !important;
+      color: #000000 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 4px 14px rgba(251, 191, 36, 0.35);
+    }
+
   </style>
 </head>
 <body>
