@@ -5,22 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#050811">
-  <title>UCSD Class Schedule & Campus Map Studio | Fall 2026</title>
+  <meta name="theme-color" content="#070b14">
+  <title>UCSD Class Schedule & Campus Navigation Studio | Fall 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
-    /* =========================================================================
-       MASTER THEME: ANTIGRAVITY OBSIDIAN & NEON GLASS
-       ========================================================================= */
     :root {
-      --bg-base: #050811;
-      --bg-surface: rgba(13, 20, 36, 0.82);
-      --bg-surface-solid: #0d1424;
-      --bg-card: rgba(18, 28, 49, 0.72);
+      --bg-base: #070b14;
+      --bg-surface: rgba(13, 20, 36, 0.85);
+      --bg-surface-solid: #0b1324;
+      --bg-card: rgba(17, 27, 48, 0.75);
       --border-subtle: rgba(255, 255, 255, 0.12);
-      --border-glow: rgba(0, 240, 255, 0.28);
+      --border-glow: rgba(0, 240, 255, 0.3);
       
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -58,24 +55,15 @@
       --font-mono: 'JetBrains Mono', monospace;
     }
 
-    
-    /* =========================================================================
-       THEME 2: APPLE SPATIAL LIGHT (Clean Frosted Glass & Pastel Accents)
-       ========================================================================= */
     body.theme-apple-light {
       --bg-base: #f8fafc;
       --bg-surface: rgba(255, 255, 255, 0.88);
       --bg-surface-solid: #ffffff;
-      --bg-card: rgba(255, 255, 255, 0.82);
+      --bg-card: rgba(255, 255, 255, 0.85);
       --border-subtle: #cbd5e1;
       --border-glow: rgba(2, 132, 199, 0.3);
       --text-main: #0f172a;
       --text-muted: #64748b;
-      --accent-cyan: #0284c7;
-      --accent-purple: #7c3aed;
-      --accent-gold: #d97706;
-      --accent-rose: #e11d48;
-      --accent-green: #059669;
 
       --dsc10-color: #0284c7;
       --dsc10-bg: #e0f2fe;
@@ -96,17 +84,16 @@
       --math183-color: #e11d48;
       --math183-bg: #ffe4e6;
       --math183-border: #fda4af;
-      --shadow-glow: 0 8px 32px rgba(2, 132, 199, 0.08);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-base);
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.06) 0%, transparent 40%);
+        radial-gradient(circle at 12% 12%, rgba(0, 240, 255, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 88% 88%, rgba(168, 85, 247, 0.05) 0%, transparent 45%);
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
@@ -115,7 +102,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Master Sticky Header */
+    /* Spatial Top Header */
     .top-header {
       background: var(--bg-surface);
       backdrop-filter: blur(24px);
@@ -135,30 +122,51 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    .brand-box { display: flex; align-items: center; gap: 12px; }
-    .brand-glyph {
+    .brand-group { display: flex; align-items: center; gap: 12px; }
+    .ucsd-badge {
       background: var(--accent-cyan);
       color: #000000;
       font-weight: 800;
       font-family: var(--font-mono);
       font-size: 0.9rem;
-      padding: 5px 9px;
+      padding: 5px 10px;
       border-radius: var(--radius-sm);
       letter-spacing: -0.5px;
       box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
     }
-    .brand-title h1 { font-size: 1.1rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.3px; }
-    .brand-title p { font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono); }
+    .header-title h1 { font-size: 1.1rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; }
+    .header-title p { font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono); }
 
-    .status-badge-bar { display: flex; align-items: center; gap: 8px; }
-    .status-pill {
+    .header-controls { display: flex; align-items: center; gap: 10px; }
+    .theme-segmented-box {
+      display: flex;
+      background: var(--bg-surface-solid);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 3px;
+    }
+    .theme-btn {
+      border: none;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.74rem;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .theme-btn.dark-active { background: var(--accent-cyan); color: #000000; }
+    .theme-btn.apple-active { background: #000000; color: #ffffff; }
+
+    .status-units-pill {
       font-family: var(--font-mono);
       font-size: 0.74rem;
       font-weight: 700;
       color: var(--accent-green);
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 999px;
     }
 
@@ -172,7 +180,7 @@
       gap: 16px;
     }
 
-    /* Control Panel */
+    /* Glass Action Control Bar */
     .glass-control-panel {
       background: var(--bg-card);
       backdrop-filter: blur(20px);
@@ -188,7 +196,7 @@
       box-shadow: var(--shadow-glow);
     }
 
-    .plan-pills-container {
+    .plan-pills-row {
       display: flex;
       align-items: center;
       gap: 6px;
@@ -235,23 +243,23 @@
       gap: 6px;
       flex-wrap: wrap;
     }
-    .btn-tech {
-      background: var(--bg-surface-solid);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 7px 13px;
+    .btn-action-gradient {
+      border: none;
+      padding: 8px 14px;
       border-radius: var(--radius-sm);
-      font-size: 0.74rem;
-      font-weight: 700;
+      font-size: 0.76rem;
+      font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-tech:active { transform: scale(0.96); }
-    .btn-tech.cyan { background: var(--accent-cyan); color: #000000; font-weight: 800; }
-    .btn-tech.gold { background: var(--accent-gold); color: #000000; font-weight: 800; }
+    .btn-action-gradient:hover { transform: translateY(-2px); }
+    .btn-action-gradient:active { transform: scale(0.96); }
+    .btn-action-gradient.cyan { background: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color: #000000; box-shadow: 0 4px 14px rgba(0, 240, 255, 0.35); }
+    .btn-action-gradient.gold { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: #000000; box-shadow: 0 4px 14px rgba(251, 191, 36, 0.35); }
+    .btn-action-gradient.gray { background: var(--bg-surface-solid); border: 1px solid var(--border-subtle); color: var(--text-main); }
 
     /* =========================================================================
        MASTER WEEKLY TIMETABLE CARD
@@ -284,7 +292,7 @@
       gap: 8px;
     }
 
-    /* Scrollable Schedule Grid Matrix */
+    /* Scrollable Schedule Matrix */
     .grid-scroll-wrapper {
       overflow-x: auto;
       overflow-y: hidden;
@@ -326,7 +334,7 @@
       border-radius: var(--radius-sm);
     }
 
-    /* Class Blocks in Matrix */
+    /* Class Event Blocks */
     .matrix-event-block {
       border-radius: var(--radius-md);
       padding: 5px 8px;
@@ -359,7 +367,7 @@
     .block-footer-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.6rem; font-family: var(--font-mono); }
     .block-room-badge { background: rgba(0,0,0,0.3); padding: 2px 5px; border-radius: 4px; font-weight: 700; }
 
-    /* Walking Route Time Badge Overlay */
+    /* Walking Route Time Badge */
     .walk-route-badge {
       grid-column-span: 1;
       z-index: 15;
@@ -478,9 +486,7 @@
     .sec-sch-row { display: flex; justify-content: space-between; align-items: center; }
     .sec-room-btn { color: var(--accent-cyan); font-weight: 700; text-decoration: underline; cursor: pointer; }
 
-    /* =========================================================================
-       SPATIAL MODAL: CAMPUS LOCATION & MAPS
-       ========================================================================= */
+    /* SPATIAL LOCATION MODAL */
     .modal-spatial-overlay {
       display: none;
       position: fixed;
@@ -580,33 +586,6 @@
       .modal-map-action-grid { grid-template-columns: 1fr; }
       .btn-map-action { flex-direction: row; padding: 14px; }
     }
-  
-    /* NEXT-GEN INTERACTIVE BUTTONS */
-    .btn-tech, .btn-plan-pill, .theme-toggle-btn {
-      position: relative;
-      overflow: hidden;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .btn-tech:hover, .btn-plan-pill:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 240, 255, 0.25);
-    }
-    .btn-tech:active, .btn-plan-pill:active {
-      transform: translateY(0) scale(0.96) !important;
-    }
-    .btn-tech.cyan {
-      background: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%) !important;
-      color: #000000 !important;
-      font-weight: 800 !important;
-      box-shadow: 0 4px 14px rgba(0, 240, 255, 0.35);
-    }
-    .btn-tech.gold {
-      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%) !important;
-      color: #000000 !important;
-      font-weight: 800 !important;
-      box-shadow: 0 4px 14px rgba(251, 191, 36, 0.35);
-    }
-
   </style>
 </head>
 <body>
@@ -614,37 +593,35 @@
   <!-- Master Header -->
   <header class="top-header">
     <div class="header-inner">
-      <div class="brand-box">
-        <div class="brand-glyph">UCSD</div>
-        <div class="brand-title">
+      <div class="brand-group">
+        <div class="ucsd-badge">UCSD</div>
+        <div class="header-title">
           <h1>Fall 2026 Schedule & Campus Maps</h1>
           <p>Triton Student System (TSS) | Kyaw Soe Lwin</p>
         </div>
       </div>
 
-            <div class="status-badge-bar" style="display:flex; align-items:center; gap:10px;">
-        <div style="display:flex; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); border-radius:999px; padding:3px; gap:3px;">
-          <button id="btnThemeDark" onclick="switchTheme('dark')" style="background:#00f0ff; color:#000000; border:none; padding:5px 13px; border-radius:999px; font-weight:800; font-size:0.74rem; font-family:var(--font-mono); cursor:pointer; transition:all 0.2s;">🌌 Cyber Dark</button>
-          <button id="btnThemeApple" onclick="switchTheme('apple-light')" style="background:transparent; color:#94a3b8; border:none; padding:5px 13px; border-radius:999px; font-weight:800; font-size:0.74rem; font-family:var(--font-mono); cursor:pointer; transition:all 0.2s;">🍎 Apple Light</button>
+      <!-- Controls & Units -->
+      <div class="header-controls">
+        <div class="theme-segmented-box">
+          <button class="theme-btn dark-active" id="btnThemeDark" onclick="switchTheme('dark')">🌌 Cyber Dark</button>
+          <button class="theme-btn" id="btnThemeApple" onclick="switchTheme('apple-light')">🍎 Apple Light</button>
         </div>
-        <div class="status-pill" id="unitsPill">12.0 Units</div>
+        <div class="status-units-pill" id="unitsPill">16.0 Units</div>
       </div>
-    </div>
     </div>
   </header>
 
   <!-- Main App Layout -->
   <main class="app-main">
 
-    <!-- Glass Control Panel (Plans & Actions) -->
+    <!-- Glass Control Panel -->
     <div class="glass-control-panel">
-      <div class="plan-pills-container" id="planPillsRow">
-        <!-- Rendered by JS -->
-      </div>
+      <div class="plan-pills-row" id="planPillsRow"></div>
       <div class="action-btn-group">
-        <button class="btn-tech gold" onclick="copyAllBookingIds()">📋 Copy IDs</button>
-        <button class="btn-tech cyan" onclick="promptSaveCurrentPlan()">💾 Save Plan</button>
-        <button class="btn-tech" onclick="exportICalendar()">📅 Export .ICS</button>
+        <button class="btn-action-gradient gold" onclick="copyAllBookingIds()">📋 Copy IDs</button>
+        <button class="btn-action-gradient cyan" onclick="promptSaveCurrentPlan()">💾 Save Plan</button>
+        <button class="btn-action-gradient gray" onclick="exportICalendar()">📅 Export .ICS</button>
       </div>
     </div>
 
@@ -655,7 +632,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           Weekly Class Timetable (Tap Class for Maps & Walking Routes)
         </h2>
-        <div class="status-pill" id="conflictStatusText">
+        <div class="status-units-pill" id="conflictStatusText">
           ● 0 Conflicts Confirmed
         </div>
       </div>
@@ -710,7 +687,7 @@
 
   </main>
 
-  <!-- SPATIAL MODAL: CAMPUS LOCATION & MAPS -->
+  <!-- SPATIAL LOCATION MODAL -->
   <div class="modal-spatial-overlay" id="locModalOverlay" onclick="closeLocModal()">
     <div class="modal-spatial-card" onclick="event.stopPropagation()">
       <div class="modal-header-banner">
@@ -878,6 +855,20 @@
       { label: "08:00 PM", time: 20.0 }
     ];
 
+    function switchTheme(mode) {
+      if (mode === 'apple-light') {
+        document.body.classList.add('theme-apple-light');
+        document.getElementById('btnThemeDark').className = 'theme-btn';
+        document.getElementById('btnThemeApple').className = 'theme-btn apple-active';
+        showToast("Switched to Apple Spatial Light Theme!");
+      } else {
+        document.body.classList.remove('theme-apple-light');
+        document.getElementById('btnThemeDark').className = 'theme-btn dark-active';
+        document.getElementById('btnThemeApple').className = 'theme-btn';
+        showToast("Switched to Cyber Dark Theme!");
+      }
+    }
+
     function timeToHours(t) {
       const [h, m] = t.split(":").map(Number);
       return h + m / 60;
@@ -1013,7 +1004,7 @@
               ${opt.code}
               <span class="sec-id-badge">${opt.bookingId}</span>
             </span>
-            <span class="status-pill" style="${opt.isWaitlist ? 'color:var(--accent-rose); border-color:var(--accent-rose); background:rgba(244,63,94,0.15);' : ''}">
+            <span class="status-units-pill" style="${opt.isWaitlist ? 'color:var(--accent-rose); border-color:var(--accent-rose); background:rgba(244,63,94,0.15);' : ''}">
               ${opt.statusText}
             </span>
           </div>
@@ -1146,7 +1137,7 @@
         });
       });
 
-      // Walking gap time calculation
+      // Walking route gap calculation
       for (const [day, dayEvs] of Object.entries(eventsByDay)) {
         dayEvs.sort((a, b) => a.startH - b.startH);
         for (let i = 0; i < dayEvs.length - 1; i++) {
@@ -1267,29 +1258,6 @@
       link.click();
       document.body.removeChild(link);
       showToast("Downloaded Calendar (.ics)!");
-    }
-
-    function openCompareModal() {
-      showToast("Opening Plan Comparison...");
-    }
-
-    
-    function switchTheme(mode) {
-      if (mode === 'apple-light') {
-        document.body.classList.add('theme-apple-light');
-        document.getElementById('btnThemeDark').style.background = 'transparent';
-        document.getElementById('btnThemeDark').style.color = 'var(--text-muted)';
-        document.getElementById('btnThemeApple').style.background = '#000';
-        document.getElementById('btnThemeApple').style.color = '#fff';
-        showToast("Switched to Apple Spatial Light Theme!");
-      } else {
-        document.body.classList.remove('theme-apple-light');
-        document.getElementById('btnThemeDark').style.background = 'var(--accent-cyan)';
-        document.getElementById('btnThemeDark').style.color = '#000';
-        document.getElementById('btnThemeApple').style.background = 'transparent';
-        document.getElementById('btnThemeApple').style.color = 'var(--text-muted)';
-        showToast("Switched to Cyber Dark Theme!");
-      }
     }
 
     window.onload = () => {
