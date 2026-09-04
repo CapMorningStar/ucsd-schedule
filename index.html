@@ -835,7 +835,7 @@
     let customPlans = JSON.parse(localStorage.getItem("ucsd_custom_plans") || "{}");
     let activeCourseTab = "dsc10";
     let currentPlanKey = "A";
-    let selectedKeys = { dsc10: "P003", cogs9: "P001", cogs14a: "P004", wcwp: "P001", math183: null };
+    let selectedKeys = { dsc10: "P003", cogs9: "P001", cogs14a: "P004", wcwp: "P005", math183: null };
     let currentModalQuery = "";
     let currentModalBookingId = "";
 
@@ -1261,10 +1261,8 @@
     }
 
     window.onload = () => {
-      renderPlanPills();
+      loadPlan('A');
       switchCourseTab('dsc10');
-      renderCalendarMatrix();
-      updateDots();
     };
   </script>
 </body>
