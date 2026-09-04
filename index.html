@@ -770,24 +770,24 @@
 
     const TSS_DB = {
       dsc10: [
-        { key: "P003", bookingId: "SE00155360", code: "DSC-010 (P-003-001)", instructor: "Janine Tiefenbruck", statusText: "Waitlist: 13", isWaitlist: true, events: [
-          { type: "Lecture", days: ["M","W","F"], start: "11:00", end: "11:50", room: "WLH 2005", code: "DSC 10 (LE)", title: "Principles of Data Science", colorClass: "dsc10" },
-          { type: "Discussion", days: ["Tu"], start: "17:00", end: "17:50", room: "WLH 2005", code: "DSC 10 (DI)", title: "DSC 10 Discussion", colorClass: "dsc10" },
-          { type: "Laboratory", days: ["F"], start: "16:00", end: "16:50", room: "CENTR 222", code: "DSC 10 (LA)", title: "DSC 10 Lab", colorClass: "dsc10" }
-        ]},
-        { key: "P004", bookingId: "SE00155361", code: "DSC-010 (P-004-001)", instructor: "Peter Chi", statusText: "Waitlist: 8", isWaitlist: true, events: [
+        { key: "P004", bookingId: "SE00155361", code: "DSC-010 (P-004-001)", instructor: "Peter Chi", statusText: "✅ BOOKED — Confirmed Seat", isWaitlist: false, events: [
           { type: "Lecture", days: ["M","W","F"], start: "10:00", end: "10:50", room: "HSS 1330", code: "DSC 10 (LE)", title: "Principles of Data Science", colorClass: "dsc10" },
           { type: "Discussion", days: ["M"], start: "16:00", end: "16:50", room: "CENTR 216", code: "DSC 10 (DI)", title: "DSC 10 Discussion", colorClass: "dsc10" },
           { type: "Laboratory", days: ["F"], start: "20:00", end: "20:50", room: "CENTR 214", code: "DSC 10 (LA)", title: "DSC 10 Lab", colorClass: "dsc10" }
         ]},
-        { key: "P001_2", bookingId: "SE00156882", code: "DSC-010 (P-001-002)", instructor: "Janine Tiefenbruck", statusText: "Waitlist: 0 (Fast WL)", isWaitlist: true, events: [
+        { key: "P003", bookingId: "SE00155360", code: "DSC-010 (P-003-001)", instructor: "Janine Tiefenbruck", statusText: "Waitlist: 22+ (not selected)", isWaitlist: true, events: [
+          { type: "Lecture", days: ["M","W","F"], start: "11:00", end: "11:50", room: "WLH 2005", code: "DSC 10 (LE)", title: "Principles of Data Science", colorClass: "dsc10" },
+          { type: "Discussion", days: ["Tu"], start: "17:00", end: "17:50", room: "WLH 2005", code: "DSC 10 (DI)", title: "DSC 10 Discussion", colorClass: "dsc10" },
+          { type: "Laboratory", days: ["F"], start: "16:00", end: "16:50", room: "CENTR 222", code: "DSC 10 (LA)", title: "DSC 10 Lab", colorClass: "dsc10" }
+        ]},
+        { key: "P001_2", bookingId: "SE00156882", code: "DSC-010 (P-001-002)", instructor: "Janine Tiefenbruck", statusText: "140 Available — but conflicts w/ COGS 9 (Mon 2pm)", isWaitlist: false, events: [
           { type: "Lecture", days: ["M","W","F"], start: "10:00", end: "10:50", room: "WLH 2005", code: "DSC 10 (LE)", title: "Principles of Data Science", colorClass: "dsc10" },
           { type: "Discussion", days: ["M"], start: "14:00", end: "14:50", room: "WLH 2005", code: "DSC 10 (DI)", title: "DSC 10 Discussion", colorClass: "dsc10" },
           { type: "Laboratory", days: ["F"], start: "17:00", end: "17:50", room: "CENTR 214", code: "DSC 10 (LA)", title: "DSC 10 Lab", colorClass: "dsc10" }
         ]}
       ],
       cogs9: [
-        { key: "P001", bookingId: "SE00157837", code: "COGS-009 (P-001-001)", instructor: "Brendan Tomoschuk", statusText: "30 Available (Open)", isWaitlist: false, events: [
+        { key: "P001", bookingId: "SE00157837", code: "COGS-009 (P-001-001)", instructor: "Brendan Tomoschuk", statusText: "✅ BOOKED — Confirmed Seat", isWaitlist: false, events: [
           { type: "Lecture", days: ["M","W","F"], start: "14:00", end: "14:50", room: "FAH 1301", code: "COGS 9 (LE)", title: "Intro to Data Science", colorClass: "cogs9" },
           { type: "Discussion", days: ["F"], start: "09:00", end: "09:50", room: "Coalition 117", code: "COGS 9 (DI)", title: "COGS 9 Discussion", colorClass: "cogs9" }
         ]},
@@ -797,7 +797,7 @@
         ]}
       ],
       cogs14a: [
-        { key: "P004", bookingId: "SE00153227", code: "COGS-014A (P-001-004)", instructor: "Sarah Creel", statusText: "23 Available (Open)", isWaitlist: false, events: [
+        { key: "P004", bookingId: "SE00153227", code: "COGS-014A (P-001-004)", instructor: "Sarah Creel", statusText: "✅ BOOKED — Confirmed Seat", isWaitlist: false, events: [
           { type: "Lecture", days: ["Tu","Th"], start: "09:30", end: "10:50", room: "Catalyst 0125", code: "COGS 14A (LE)", title: "Intro to Research Methods", colorClass: "cogs14a" },
           { type: "Laboratory", days: ["W"], start: "15:00", end: "15:50", room: "CSB 004", code: "COGS 14A (LA)", title: "COGS 14A Lab", colorClass: "cogs14a" }
         ]},
@@ -807,6 +807,9 @@
         ]}
       ],
       wcwp: [
+        { key: "P008", bookingId: "SE00155698", code: "WCWP-100 (P-008-001)", instructor: "Natalie Susi", statusText: "🟠 WAITLISTED — Position 5 of 7", isWaitlist: true, events: [
+          { type: "Lecture", days: ["Tu","Th"], start: "11:00", end: "12:20", room: "WLH 2110", code: "WCWP 100", title: "Academic Writing Seminar", colorClass: "wcwp100" }
+        ]},
         { key: "P001", bookingId: "SE00155691", code: "WCWP-100 (P-001-001)", instructor: "Tricia Ornelas", statusText: "16 Available (Open)", isWaitlist: false, events: [
           { type: "Lecture", days: ["Tu","Th"], start: "11:00", end: "12:20", room: "SAC 101", code: "WCWP 100", title: "Academic Writing Seminar", colorClass: "wcwp100" }
         ]},
@@ -826,16 +829,13 @@
     };
 
     const BUILTIN_PRESETS = {
-      A: { name: "★ Plan A (16U)", dsc10: "P003", cogs9: "P001", cogs14a: "P004", wcwp: "P005", math183: null },
-      B: { name: "Plan B (Backup 1)", dsc10: "P004", cogs9: "P002", cogs14a: "P006", wcwp: "P004", math183: null },
-      C: { name: "Plan C (Fast WL)", dsc10: "P001_2", cogs9: "P001", cogs14a: "P006", wcwp: "P005", math183: null },
-      D: { name: "★ Plan D (+ MATH 183)", dsc10: "P003", cogs9: "P001", cogs14a: "P004", wcwp: "P001", math183: "P006" }
+      REG: { name: "✅ My Registration", dsc10: "P004", cogs9: "P001", cogs14a: "P004", wcwp: "P008", math183: null }
     };
 
     let customPlans = JSON.parse(localStorage.getItem("ucsd_custom_plans") || "{}");
     let activeCourseTab = "dsc10";
-    let currentPlanKey = "A";
-    let selectedKeys = { dsc10: "P003", cogs9: "P001", cogs14a: "P004", wcwp: "P005", math183: null };
+    let currentPlanKey = "REG";
+    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", wcwp: "P008", math183: null };
     let currentModalQuery = "";
     let currentModalBookingId = "";
 
@@ -946,7 +946,7 @@
       if (!confirm(`Delete "${customPlans[k].name}"?`)) return;
       delete customPlans[k];
       localStorage.setItem("ucsd_custom_plans", JSON.stringify(customPlans));
-      if (currentPlanKey === k) loadPlan('A');
+      if (currentPlanKey === k) loadPlan('REG');
       else renderPlanPills();
       showToast("Plan deleted.");
     }
@@ -1261,7 +1261,7 @@
     }
 
     window.onload = () => {
-      loadPlan('A');
+      loadPlan('REG');
       switchCourseTab('dsc10');
     };
   </script>
