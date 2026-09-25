@@ -56,6 +56,7 @@ An interactive, responsive schedule planner and campus navigation studio designe
 - **CENTR**: Center Hall, Building #114, Library Walk & Myers Dr
 - **HSS**: Humanities & Social Sciences, Building #250, Muir College
 - **CSB**: Cognitive Science Building, Building #350, Marshall College
+- **COA**: Coalition Building, Building #265 (RWNLLN), Ridge Walk, Marshall College
 
 ---
 
