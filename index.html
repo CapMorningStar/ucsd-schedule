@@ -552,16 +552,16 @@
 
     .modal-map-action-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     .btn-map-action {
       border: none;
-      padding: 14px 10px;
+      padding: 12px 10px;
       border-radius: var(--radius-md);
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 800;
       cursor: pointer;
       display: flex;
@@ -575,6 +575,7 @@
     .btn-map-action:active { transform: scale(0.96); }
     .btn-map-action.apple { background: #000000; color: #ffffff; border: 1px solid #444; }
     .btn-map-action.google { background: #0284c7; color: #ffffff; }
+    .btn-map-action.route { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; }
     .btn-map-action.copy { background: var(--bg-surface-solid); color: var(--text-main); border: 1px solid var(--border-subtle); }
 
     .toast-spatial {
@@ -583,8 +584,8 @@
     .toast-spatial.show { transform: translateY(0); opacity: 1; }
 
     @media (max-width: 768px) {
-      .modal-map-action-grid { grid-template-columns: 1fr; }
-      .btn-map-action { flex-direction: row; padding: 14px; }
+      .modal-map-action-grid { grid-template-columns: repeat(2, 1fr); }
+      .btn-map-action { flex-direction: column; padding: 12px 6px; font-size: 0.78rem; }
     }
   </style>
 </head>
@@ -720,15 +721,19 @@
           </div>
         </div>
 
-        <!-- 3 Big Action Buttons -->
+        <!-- 4 Action Buttons -->
         <div class="modal-map-action-grid">
-          <button class="btn-map-action apple" onclick="openDirectAppleMaps()">
-            <span>🍎</span>
-            <span>Apple Maps</span>
-          </button>
           <button class="btn-map-action google" onclick="openDirectGoogleMaps()">
             <span>🗺️</span>
             <span>Google Maps</span>
+          </button>
+          <button class="btn-map-action route" onclick="openDirectWalkingDirections()">
+            <span>🚶</span>
+            <span>Route & Minutes</span>
+          </button>
+          <button class="btn-map-action apple" onclick="openDirectAppleMaps()">
+            <span>🍎</span>
+            <span>Apple Maps</span>
           </button>
           <button class="btn-map-action copy" onclick="copyModalId()">
             <span>📋</span>
@@ -745,27 +750,27 @@
 
   <script>
     const UCSD_LOCATIONS = {
-      "WLH 2005": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2005 (2nd Floor)", address: "3224 Matthews Ln, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/place/Warren+Lecture+Hall/@32.8805918,-117.2344208,17z", appleUrl: "https://maps.apple.com/?ll=32.880592,-117.234421&q=Warren+Lecture+Hall+UCSD" },
-      "WLH 2110": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2110 (2nd Floor)", address: "3224 Matthews Ln, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/place/Warren+Lecture+Hall/@32.8805918,-117.2344208,17z", appleUrl: "https://maps.apple.com/?ll=32.880592,-117.234421&q=Warren+Lecture+Hall+UCSD" },
-      "WLH 2113": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2113 (2nd Floor)", address: "3224 Matthews Ln, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/place/Warren+Lecture+Hall/@32.8805918,-117.2344208,17z", appleUrl: "https://maps.apple.com/?ll=32.880592,-117.234421&q=Warren+Lecture+Hall+UCSD" },
-      "FAH 1301": { bldgName: "Franklin Antonio Hall (FAH)", bldgNumber: "Building #395", room: "Auditorium Room 1301 (1st Floor)", address: "3180 Voigt Dr, La Jolla, CA 92093", neighborhood: "Warren College Engineering", googleUrl: "https://www.google.com/maps/place/Franklin+Antonio+Hall/@32.8835013,-117.2349145,17z", appleUrl: "https://maps.apple.com/?ll=32.883501,-117.234915&q=Franklin+Antonio+Hall+UCSD" },
-      "PCH 109": { bldgName: "Pepper Canyon Hall (PCH)", bldgNumber: "Building #246", room: "Auditorium Room 109 (1st Floor)", address: "9435 Russell Ln, La Jolla, CA 92093", neighborhood: "Pepper Canyon / Central Hub", googleUrl: "https://www.google.com/maps/place/Pepper+Canyon+Hall,+La+Jolla,+CA+92093/@32.8783769,-117.2337607,17z", appleUrl: "https://maps.apple.com/?ll=32.878377,-117.233761&q=Pepper+Canyon+Hall+UCSD" },
-      "PCH 120": { bldgName: "Pepper Canyon Hall (PCH)", bldgNumber: "Building #246", room: "Room 120 (1st Floor)", address: "9435 Russell Ln, La Jolla, CA 92093", neighborhood: "Pepper Canyon / Central Hub", googleUrl: "https://www.google.com/maps/place/Pepper+Canyon+Hall,+La+Jolla,+CA+92093/@32.8783769,-117.2337607,17z", appleUrl: "https://maps.apple.com/?ll=32.878377,-117.233761&q=Pepper+Canyon+Hall+UCSD" },
-      "Catalyst 0125": { bldgName: "Catalyst Building (NTPLLN)", bldgNumber: "Building #980", room: "Room 0125 (Ground Floor)", address: "9685 Scholars Dr N, La Jolla, CA 92093", neighborhood: "North Torrey Pines (NTPLLN)", googleUrl: "https://www.google.com/maps/place/Catalyst+Building/@32.8804431,-117.2416338,17z", appleUrl: "https://maps.apple.com/?ll=32.880443,-117.241634&q=Catalyst+Building+UCSD" },
+      "WLH 2005": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2005 (2nd Floor)", address: "3224 Matthews Ln, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Warren+Lecture+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880592,-117.234421&q=Warren+Lecture+Hall+UCSD" },
+      "WLH 2110": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2110 (2nd Floor)", address: "3224 Matthews Ln, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Warren+Lecture+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880592,-117.234421&q=Warren+Lecture+Hall+UCSD" },
+      "WLH 2113": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2113 (2nd Floor)", address: "3224 Matthews Ln, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Warren+Lecture+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880592,-117.234421&q=Warren+Lecture+Hall+UCSD" },
+      "FAH 1301": { bldgName: "Franklin Antonio Hall (FAH)", bldgNumber: "Building #395", room: "Auditorium Room 1301 (1st Floor)", address: "3180 Voigt Dr, La Jolla, CA 92093", neighborhood: "Warren College Engineering", googleUrl: "https://www.google.com/maps/search/?api=1&query=Franklin+Antonio+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.883501,-117.234915&q=Franklin+Antonio+Hall+UCSD" },
+      "PCH 109": { bldgName: "Pepper Canyon Hall (PCH)", bldgNumber: "Building #246", room: "Auditorium Room 109 (1st Floor)", address: "9435 Russell Ln, La Jolla, CA 92093", neighborhood: "Pepper Canyon / Central Hub", googleUrl: "https://www.google.com/maps/search/?api=1&query=Pepper+Canyon+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.878377,-117.233761&q=Pepper+Canyon+Hall+UCSD" },
+      "PCH 120": { bldgName: "Pepper Canyon Hall (PCH)", bldgNumber: "Building #246", room: "Room 120 (1st Floor)", address: "9435 Russell Ln, La Jolla, CA 92093", neighborhood: "Pepper Canyon / Central Hub", googleUrl: "https://www.google.com/maps/search/?api=1&query=Pepper+Canyon+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.878377,-117.233761&q=Pepper+Canyon+Hall+UCSD" },
+      "Catalyst 0125": { bldgName: "Catalyst Building (NTPLLN)", bldgNumber: "Building #980", room: "Room 0125 (Ground Floor)", address: "9685 Scholars Dr N, La Jolla, CA 92093", neighborhood: "North Torrey Pines (NTPLLN)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Catalyst+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880443,-117.241634&q=Catalyst+Building+UCSD" },
       "SAC 101": { bldgName: "Student Activity Center (SAC)", bldgNumber: "Building #229", room: "Room 101", address: "Voigt Dr, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Student+Activity+Center+Warren+College,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Student+Activity+Center+Warren+College+UCSD" },
       "SAC 132": { bldgName: "Student Activity Center (SAC)", bldgNumber: "Building #229", room: "Room 132", address: "Voigt Dr, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Student+Activity+Center+Warren+College,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Student+Activity+Center+Warren+College+UCSD" },
-      "CENTR 203": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 203 (2nd Floor)", address: "9448 Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Library Walk)", googleUrl: "https://www.google.com/maps/place/Center+Hall/@32.8775468,-117.2374084,17z", appleUrl: "https://maps.apple.com/?ll=32.877547,-117.237408&q=Center+Hall+UCSD" },
-      "CENTR 214": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 214 (2nd Floor)", address: "9448 Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Library Walk)", googleUrl: "https://www.google.com/maps/place/Center+Hall/@32.8775468,-117.2374084,17z", appleUrl: "https://maps.apple.com/?ll=32.877547,-117.237408&q=Center+Hall+UCSD" },
-      "CENTR 216": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 216 (2nd Floor)", address: "9448 Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Library Walk)", googleUrl: "https://www.google.com/maps/place/Center+Hall/@32.8775468,-117.2374084,17z", appleUrl: "https://maps.apple.com/?ll=32.877547,-117.237408&q=Center+Hall+UCSD" },
-      "CENTR 222": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 222 (2nd Floor)", address: "9448 Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Library Walk)", googleUrl: "https://www.google.com/maps/place/Center+Hall/@32.8775468,-117.2374084,17z", appleUrl: "https://maps.apple.com/?ll=32.877547,-117.237408&q=Center+Hall+UCSD" },
+      "CENTR 203": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 203 (2nd Floor)", address: "9448 Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Library Walk)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Center+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.877547,-117.237408&q=Center+Hall+UCSD" },
+      "CENTR 214": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 214 (2nd Floor)", address: "9448 Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Library Walk)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Center+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.877547,-117.237408&q=Center+Hall+UCSD" },
+      "CENTR 216": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 216 (2nd Floor)", address: "9448 Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Library Walk)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Center+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.877547,-117.237408&q=Center+Hall+UCSD" },
+      "CENTR 222": { bldgName: "Center Hall (CENTR)", bldgNumber: "Building #114", room: "Room 222 (2nd Floor)", address: "9448 Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Library Walk)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Center+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.877547,-117.237408&q=Center+Hall+UCSD" },
       "HSS 1305": { bldgName: "Humanities & Social Sciences (HSS)", bldgNumber: "Building #250", room: "Room 1305 (1st Floor)", address: "2970 Scholars Lane, La Jolla, CA 92093", neighborhood: "John Muir College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Humanities+and+Social+Sciences+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.878153,-117.241704&q=Humanities+and+Social+Sciences+Building+UCSD" },
       "HSS 1330": { bldgName: "Humanities & Social Sciences (HSS)", bldgNumber: "Building #250", room: "Room 1330 (1st Floor)", address: "2970 Scholars Lane, La Jolla, CA 92093", neighborhood: "John Muir College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Humanities+and+Social+Sciences+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.878153,-117.241704&q=Humanities+and+Social+Sciences+Building+UCSD" },
       "AP&M B402A": { bldgName: "Applied Physics & Math (AP&M)", bldgNumber: "Building #111", room: "Basement B402A", address: "Muir College Dr, La Jolla, CA 92093", neighborhood: "John Muir College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Applied+Physics+and+Mathematics+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Applied+Physics+and+Mathematics+Building+UCSD" },
       "DIB 121": { bldgName: "Design and Innovation Building (DIB)", bldgNumber: "Building #440", room: "Room 121", address: "9510 Gilman Dr, La Jolla, CA 92093", neighborhood: "Pepper Canyon Trolley", googleUrl: "https://www.google.com/maps/search/?api=1&query=Design+and+Innovation+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Design+and+Innovation+Building+UCSD" },
-      "CSB 004": { bldgName: "Cognitive Science Building (CSB)", bldgNumber: "Building #350", room: "Room 004 (Basement Lab)", address: "3047 Exploration Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/place/Cognitive+Science+Building/@32.8805813,-117.2395409,17z", appleUrl: "https://maps.apple.com/?ll=32.880581,-117.239541&q=Cognitive+Science+Building+UCSD" },
-      "CSB 005": { bldgName: "Cognitive Science Building (CSB)", bldgNumber: "Building #350", room: "Room 005 (1st Floor Lab)", address: "3047 Exploration Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/place/Cognitive+Science+Building/@32.8805813,-117.2395409,17z", appleUrl: "https://maps.apple.com/?ll=32.880581,-117.239541&q=Cognitive+Science+Building+UCSD" },
-      "Coalition 117": { bldgName: "Coalition Building (COA)", bldgNumber: "Building #265 (RWNLLN)", room: "Room 117 (1st Floor)", address: "Ridge Walk / 3015 Voigt Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps?q=32.881886,-117.239780", appleUrl: "https://maps.apple.com/?ll=32.881886,-117.239780&q=Coalition+Building+UCSD" },
-      "Coalition B30": { bldgName: "Coalition Building (COA)", bldgNumber: "Building #265 (RWNLLN)", room: "Room B30 (Basement)", address: "Ridge Walk / 3015 Voigt Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps?q=32.881886,-117.239780", appleUrl: "https://maps.apple.com/?ll=32.881886,-117.239780&q=Coalition+Building+UCSD" }
+      "CSB 004": { bldgName: "Cognitive Science Building (CSB)", bldgNumber: "Building #350", room: "Room 004 (Basement Lab)", address: "3047 Exploration Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Cognitive+Science+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880581,-117.239541&q=Cognitive+Science+Building+UCSD" },
+      "CSB 005": { bldgName: "Cognitive Science Building (CSB)", bldgNumber: "Building #350", room: "Room 005 (1st Floor Lab)", address: "3047 Exploration Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Cognitive+Science+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880581,-117.239541&q=Cognitive+Science+Building+UCSD" },
+      "Coalition 117": { bldgName: "Coalition Building (COA)", bldgNumber: "Building #265 (RWNLLN)", room: "Room 117 (1st Floor)", address: "Ridge Walk / 3015 Voigt Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Coalition+Building,+3015+Voigt+Dr,+La+Jolla,+CA+92093", appleUrl: "https://maps.apple.com/?ll=32.881886,-117.239780&q=Coalition+Building+UCSD" },
+      "Coalition B30": { bldgName: "Coalition Building (COA)", bldgNumber: "Building #265 (RWNLLN)", room: "Room B30 (Basement)", address: "Ridge Walk / 3015 Voigt Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Coalition+Building,+3015+Voigt+Dr,+La+Jolla,+CA+92093", appleUrl: "https://maps.apple.com/?ll=32.881886,-117.239780&q=Coalition+Building+UCSD" }
     };
 
     const TSS_DB = {
@@ -1154,22 +1159,21 @@
             routeTag.style.gridColumn = `${colIdx}`;
             routeTag.style.gridRow = `${startRow}`;
             routeTag.style.marginTop = `${((curr.endH - 9.0) % 1) * 50}px`;
-            const isCoalitionToHss = curr.room.includes("Coalition") && next.room.includes("HSS");
-            const isCatalystToWlh = curr.room.includes("Catalyst") && next.room.includes("WLH");
-            let walkEstMin = "6";
-            if (isCoalitionToHss) walkEstMin = "5";
-            else if (isCatalystToWlh) walkEstMin = "10";
+            const currLoc = UCSD_LOCATIONS[curr.room] || { bldgName: curr.room };
+            const nextLoc = UCSD_LOCATIONS[next.room] || { bldgName: next.room };
+
+            let walkEstMin = "7";
+            if (curr.room.includes("Coalition") && next.room.includes("HSS")) walkEstMin = "5";
+            else if (curr.room.includes("Catalyst") && next.room.includes("WLH")) walkEstMin = "11";
+            else if (curr.room.includes("FAH") && next.room.includes("CSB")) walkEstMin = "8";
+            else if (curr.room.includes("FAH") && next.room.includes("CENTR")) walkEstMin = "9";
+            else if (curr.room.includes("CENTR") && next.room.includes("HSS")) walkEstMin = "6";
 
             routeTag.innerHTML = `🚶 ${curr.room.split(' ')[0]} ➔ ${next.room.split(' ')[0]} (~${walkEstMin}m walk)`;
-            routeTag.title = (isCoalitionToHss || isCatalystToWlh) ? "Click to open Google Maps walking route!" : `Walking gap: ${gapMin} min`;
+            routeTag.title = `Click to view walking route (${curr.room} ➔ ${next.room})`;
+            const walkDirUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(currLoc.bldgName + ', UC San Diego')}&destination=${encodeURIComponent(nextLoc.bldgName + ', UC San Diego')}&travelmode=walking`;
             routeTag.onclick = () => {
-              if (isCoalitionToHss) {
-                window.open("https://www.google.com/maps/dir/32.881886,-117.239780/Humanities+and+Social+Sciences+Building,+2970+Scholars+Ln,+La+Jolla,+CA+92093/@32.8800,-117.2405,17z/data=!4m2!4m1!3e2", "_blank");
-              } else if (isCatalystToWlh) {
-                window.open("https://www.google.com/maps/dir/Catalyst+Building,+La+Jolla,+CA+92037/Warren+Lecture+Hall,+3224+Matthews+Ln,+La+Jolla,+CA+92093/@32.8805128,-117.2431772,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x80dc07be07f432c9:0x3146edccb09383e2!2m2!1d-117.2416338!2d32.8804431!1m5!1m1!1s0x80dc06c36365b897:0x83a4a90fd425f864!2m2!1d-117.2344208!2d32.8805918!3e2", "_blank");
-              } else {
-                showToast(`Walking gap: ${gapMin} min (${curr.room} to ${next.room})`);
-              }
+              window.open(walkDirUrl, '_blank') || (window.location.href = walkDirUrl);
             };
             grid.appendChild(routeTag);
           }
@@ -1180,6 +1184,7 @@
     /* MODAL HANDLERS */
     let currentModalGoogleUrl = "";
     let currentModalAppleUrl = "";
+    let currentModalDirectionsUrl = "";
 
     function openLocationPopup(code, title, type, instructor, days, start, end, room, bookingId, e) {
       if (e) e.stopPropagation();
@@ -1202,8 +1207,9 @@
       document.getElementById("modalIdVal").innerText = bookingId;
 
       currentModalBookingId = bookingId;
-      currentModalQuery = `${loc.bldgName} ${loc.address}`;
+      currentModalQuery = `${loc.bldgName}, UC San Diego`;
       currentModalGoogleUrl = loc.googleUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentModalQuery)}`;
+      currentModalDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(currentModalQuery)}&travelmode=walking`;
       currentModalAppleUrl = loc.appleUrl || `https://maps.apple.com/?q=${encodeURIComponent(currentModalQuery)}`;
 
       document.getElementById("locModalOverlay").classList.add("show");
@@ -1220,6 +1226,11 @@
 
     function openDirectGoogleMaps() {
       const url = currentModalGoogleUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentModalQuery)}`;
+      window.open(url, '_blank') || (window.location.href = url);
+    }
+
+    function openDirectWalkingDirections() {
+      const url = currentModalDirectionsUrl || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(currentModalQuery)}&travelmode=walking`;
       window.open(url, '_blank') || (window.location.href = url);
     }
 
