@@ -414,7 +414,7 @@
 
     .course-tabs-deck {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 6px;
       background: var(--bg-surface-solid);
       padding: 6px;
@@ -453,8 +453,6 @@
     .tab-course-pill.soci141 .tab-c-code { color: var(--soci141-color); }
     .tab-course-pill.wcwp.active { border-color: var(--wcwp-color); }
     .tab-course-pill.wcwp .tab-c-code { color: var(--wcwp-color); }
-    .tab-course-pill.math183.active { border-color: var(--math183-color); }
-    .tab-course-pill.math183 .tab-c-code { color: var(--math183-color); }
 
     .section-cards-deck {
       display: flex;
@@ -691,10 +689,6 @@
           <span class="tab-c-code">WCWP 100</span>
           <span class="tab-c-dot" id="dot_wcwp">○ WL #5</span>
         </button>
-        <button class="tab-course-pill math183" onclick="switchCourseTab('math183')" id="cTab_math183">
-          <span class="tab-c-code">MATH 183</span>
-          <span class="tab-c-dot" id="dot_math183">○ Optional</span>
-        </button>
       </div>
 
       <!-- Section Cards List -->
@@ -845,24 +839,18 @@
         { key: "P005", bookingId: "SE00155695", code: "WCWP-100 (P-005-001)", instructor: "Mark Young", statusText: "⚠ FULL — 0 Avail / 0 Waitlist (Live TSS)", isWaitlist: true, events: [
           { type: "Lecture", days: ["Tu","Th"], start: "14:00", end: "15:20", room: "SAC 132", code: "WCWP 100", title: "Academic Writing Seminar", colorClass: "wcwp100" }
         ]}
-      ],
-      math183: [
-        { key: "P006", bookingId: "SE00152819", code: "MATH-183 (P-001-006)", instructor: "Denise Rava", statusText: "2 Available (Open!)", isWaitlist: false, events: [
-          { type: "Lecture", days: ["M","W","F"], start: "13:00", end: "13:50", room: "PCH 109", code: "MATH 183 (LE)", title: "Statistical Methods", colorClass: "math183" },
-          { type: "Discussion", days: ["M"], start: "18:00", end: "18:50", room: "CENTR 203", code: "MATH 183 (DI)", title: "MATH 183 Discussion", colorClass: "math183" }
-        ]}
       ]
     };
 
     const BUILTIN_PRESETS = {
-      REG: { name: "✅ Enrolled 16 Units (SOCI 141)", dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: null, math183: null },
-      WITH_WCWP: { name: "⏳ If WCWP Clears (20 Units)", dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: "P008", math183: null }
+      REG: { name: "✅ Enrolled 16 Units (SOCI 141)", dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: null },
+      WITH_WCWP: { name: "⏳ If WCWP Clears (20 Units)", dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: "P008" }
     };
 
     let customPlans = JSON.parse(localStorage.getItem("ucsd_custom_plans") || "{}");
     let activeCourseTab = "dsc10";
     let currentPlanKey = "REG";
-    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: null, math183: null };
+    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: null };
     let currentModalQuery = "";
     let currentModalBookingId = "";
 
@@ -939,7 +927,7 @@
     function loadCustomPlan(k) {
       currentPlanKey = k;
       const p = customPlans[k];
-      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, soci141: p.soci141 || null, wcwp: p.wcwp, math183: p.math183 || null };
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, soci141: p.soci141 || null, wcwp: p.wcwp };
       renderPlanPills();
       renderSectionCards();
       renderCalendarMatrix();
@@ -959,8 +947,7 @@
         cogs9: selectedKeys.cogs9,
         cogs14a: selectedKeys.cogs14a,
         soci141: selectedKeys.soci141,
-        wcwp: selectedKeys.wcwp,
-        math183: selectedKeys.math183
+        wcwp: selectedKeys.wcwp
       };
 
       localStorage.setItem("ucsd_custom_plans", JSON.stringify(customPlans));
@@ -989,8 +976,7 @@
         cogs9: "COGS-009: Introduction to Data Science (4.0 Units)",
         cogs14a: "COGS-014A: Introduction to Research Methods (4.0 Units)",
         soci141: "SOCI-141: Crime and Society — Warren Upper-Div GE (4.0 Units)",
-        wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units)",
-        math183: "MATH-183: Statistical Methods (4.0 Units)"
+        wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units)"
       };
       document.getElementById("customizerTitle").innerText = titles[tabKey];
       renderSectionCards();
@@ -1052,7 +1038,7 @@
 
     function selectSection(courseKey, itemKey, e) {
       if (e) e.stopPropagation();
-      if ((courseKey === 'math183' || courseKey === 'wcwp' || courseKey === 'soci141') && selectedKeys[courseKey] === itemKey) {
+      if ((courseKey === 'wcwp' || courseKey === 'soci141') && selectedKeys[courseKey] === itemKey) {
         selectedKeys[courseKey] = null;
         showToast(`Deselected ${courseKey.toUpperCase()}`);
       } else {
@@ -1068,7 +1054,7 @@
     }
 
     function updateDots() {
-      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'soci141', 'wcwp', 'math183']) {
+      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'soci141', 'wcwp']) {
         const dotElem = document.getElementById(`dot_${crs}`);
         if (!dotElem) continue;
         if (selectedKeys[crs]) {
@@ -1078,9 +1064,6 @@
           if (crs === 'wcwp') {
             dotElem.innerText = "○ WL #5";
             dotElem.style.color = "var(--accent-gold)";
-          } else if (crs === 'math183') {
-            dotElem.innerText = "○ Optional";
-            dotElem.style.color = "var(--text-muted)";
           } else {
             dotElem.innerText = "○ Not selected";
             dotElem.style.color = "var(--accent-rose)";
