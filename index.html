@@ -52,6 +52,10 @@
       --math183-bg: rgba(244, 63, 94, 0.12);
       --math183-border: rgba(244, 63, 94, 0.4);
 
+      --pace-color: #ec4899;
+      --pace-bg: rgba(236, 72, 153, 0.15);
+      --pace-border: rgba(236, 72, 153, 0.45);
+
       --radius-lg: 20px;
       --radius-md: 14px;
       --radius-sm: 8px;
@@ -92,6 +96,10 @@
       --math183-color: #e11d48;
       --math183-bg: #ffe4e6;
       --math183-border: #fda4af;
+
+      --pace-color: #db2777;
+      --pace-bg: #fdf2f8;
+      --pace-border: #f472b6;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -368,6 +376,7 @@
     .matrix-event-block.soci141 { background: var(--soci141-bg); border: 1.5px solid var(--soci141-border); color: var(--soci141-color); }
     .matrix-event-block.wcwp100 { background: var(--wcwp-bg); border: 1.5px solid var(--wcwp-border); color: var(--wcwp-color); }
     .matrix-event-block.math183 { background: var(--math183-bg); border: 1.5px solid var(--math183-border); color: var(--math183-color); }
+    .matrix-event-block.pace { background: var(--pace-bg); border: 1.5px solid var(--pace-border); color: var(--pace-color); }
 
     .block-header-row { display: flex; justify-content: space-between; align-items: flex-start; }
     .block-code-text { font-weight: 800; font-size: 0.74rem; font-family: var(--font-mono); }
@@ -414,7 +423,7 @@
 
     .course-tabs-deck {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 6px;
       background: var(--bg-surface-solid);
       padding: 6px;
@@ -453,6 +462,8 @@
     .tab-course-pill.soci141 .tab-c-code { color: var(--soci141-color); }
     .tab-course-pill.wcwp.active { border-color: var(--wcwp-color); }
     .tab-course-pill.wcwp .tab-c-code { color: var(--wcwp-color); }
+    .tab-course-pill.pace.active { border-color: var(--pace-color); }
+    .tab-course-pill.pace .tab-c-code { color: var(--pace-color); }
 
     .section-cards-deck {
       display: flex;
@@ -689,6 +700,10 @@
           <span class="tab-c-code">WCWP 100</span>
           <span class="tab-c-dot" id="dot_wcwp">○ WL #5</span>
         </button>
+        <button class="tab-course-pill pace" onclick="switchCourseTab('pace')" id="cTab_pace">
+          <span class="tab-c-code">PACE (Rosa)</span>
+          <span class="tab-c-dot" id="dot_pace">✓ 8 Hrs</span>
+        </button>
       </div>
 
       <!-- Section Cards List -->
@@ -780,7 +795,9 @@
       "CSB 005": { bldgName: "Cognitive Science Building (CSB)", bldgNumber: "Building #350", room: "Room 005 (1st Floor Lab)", address: "3047 Exploration Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Cognitive+Science+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880581,-117.239541&q=Cognitive+Science+Building+UCSD" },
       "Coalition 117": { bldgName: "Coalition Building (COA)", bldgNumber: "Building #265 (RWNLLN)", room: "Room 117 (1st Floor)", address: "Ridge Walk / 3015 Voigt Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Coalition+Building,+3015+Voigt+Dr,+La+Jolla,+CA+92093", appleUrl: "https://maps.apple.com/?ll=32.881886,-117.239780&q=Coalition+Building+UCSD" },
       "Coalition B30": { bldgName: "Coalition Building (COA)", bldgNumber: "Building #265 (RWNLLN)", room: "Room B30 (Basement)", address: "Ridge Walk / 3015 Voigt Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Coalition+Building,+3015+Voigt+Dr,+La+Jolla,+CA+92093", appleUrl: "https://maps.apple.com/?ll=32.881886,-117.239780&q=Coalition+Building+UCSD" },
-      "Podemos 1A18": { bldgName: "Podemos Building (Eighth College)", bldgNumber: "Building #910", room: "Room 1A18 (Classroom, 1st Floor)", address: "9235 Scholars Dr S, La Jolla, CA 92093", neighborhood: "Eighth College / Theatre District", googleUrl: "https://www.google.com/maps/search/?api=1&query=Podemos+Building,+Eighth+College,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Podemos+Building+Eighth+College+UCSD" }
+      "Podemos 1A18": { bldgName: "Podemos Building (Eighth College)", bldgNumber: "Building #910", room: "Room 1A18 (Classroom, 1st Floor)", address: "9235 Scholars Dr S, La Jolla, CA 92093", neighborhood: "Eighth College / Theatre District", googleUrl: "https://www.google.com/maps/search/?api=1&query=Podemos+Building,+Eighth+College,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Podemos+Building+Eighth+College+UCSD" },
+      "SSC 562": { bldgName: "Student Services Center (SSC)", bldgNumber: "Building #402", room: "Room 562 (5th Floor)", address: "402 University Center, Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Near Price Center)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Student+Services+Center,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.879133,-117.236611&q=Student+Services+Center+UCSD" },
+      "Virtual / Remote": { bldgName: "Triton Firsts Virtual Office", bldgNumber: "Online / Zoom", room: "Virtual Workspace", address: "Remote Work (UC San Diego First-Gen Initiatives)", neighborhood: "Online / Hybrid Work", googleUrl: "https://srs.ucsd.edu/initiatives/triton-firsts/about.html", appleUrl: "https://srs.ucsd.edu/initiatives/triton-firsts/about.html" }
     };
 
     const TSS_DB = {
@@ -839,18 +856,26 @@
         { key: "P005", bookingId: "SE00155695", code: "WCWP-100 (P-005-001)", instructor: "Mark Young", statusText: "⚠ FULL — 0 Avail / 0 Waitlist (Live TSS)", isWaitlist: true, events: [
           { type: "Lecture", days: ["Tu","Th"], start: "14:00", end: "15:20", room: "SAC 132", code: "WCWP 100", title: "Academic Writing Seminar", colorClass: "wcwp100" }
         ]}
+      ],
+      pace: [
+        { key: "PACE_DEFAULT", bookingId: "PACE-ELO-562", code: "Triton Firsts (PACE)", instructor: "Rosa Tejeda, M.A.", statusText: "💼 FELLOWSHIP — 8.0 Hrs/Wk", isWaitlist: false, events: [
+          { type: "Virtual Work", days: ["M"], start: "11:30", end: "13:30", room: "Virtual / Remote", code: "PACE (Virtual)", title: "Triton Firsts UX Internship", colorClass: "pace" },
+          { type: "Virtual Work", days: ["Tu"], start: "13:00", end: "15:00", room: "Virtual / Remote", code: "PACE (Virtual)", title: "Triton Firsts UX Internship", colorClass: "pace" },
+          { type: "In-Person Work", days: ["W"], start: "11:30", end: "13:30", room: "SSC 562", code: "PACE (In-Person)", title: "Triton Firsts UX Internship", colorClass: "pace" },
+          { type: "In-Person Work", days: ["Th"], start: "13:00", end: "15:00", room: "SSC 562", code: "PACE (In-Person)", title: "Triton Firsts UX Internship", colorClass: "pace" }
+        ]}
       ]
     };
 
     const BUILTIN_PRESETS = {
-      REG: { name: "✅ Enrolled 16 Units (SOCI 141)", dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: null },
-      WITH_WCWP: { name: "⏳ If WCWP Clears (20 Units)", dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: "P008" }
+      REG: { name: "✅ Enrolled 16 Units (SOCI 141) + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: null, pace: "PACE_DEFAULT" },
+      WITH_WCWP: { name: "⏳ If WCWP Clears (20 Units) + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: "P008", pace: "PACE_DEFAULT" }
     };
 
     let customPlans = JSON.parse(localStorage.getItem("ucsd_custom_plans") || "{}");
     let activeCourseTab = "dsc10";
     let currentPlanKey = "REG";
-    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: null };
+    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", soci141: "P001", wcwp: null, pace: "PACE_DEFAULT" };
     let currentModalQuery = "";
     let currentModalBookingId = "";
 
@@ -916,7 +941,7 @@
     function loadPlan(k) {
       currentPlanKey = k;
       const p = BUILTIN_PRESETS[k];
-      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, soci141: p.soci141, wcwp: p.wcwp, math183: p.math183 };
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, soci141: p.soci141, wcwp: p.wcwp, math183: p.math183, pace: p.pace || "PACE_DEFAULT" };
       renderPlanPills();
       renderSectionCards();
       renderCalendarMatrix();
@@ -927,7 +952,7 @@
     function loadCustomPlan(k) {
       currentPlanKey = k;
       const p = customPlans[k];
-      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, soci141: p.soci141 || null, wcwp: p.wcwp };
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, soci141: p.soci141 || null, wcwp: p.wcwp, pace: p.pace || "PACE_DEFAULT" };
       renderPlanPills();
       renderSectionCards();
       renderCalendarMatrix();
@@ -947,7 +972,8 @@
         cogs9: selectedKeys.cogs9,
         cogs14a: selectedKeys.cogs14a,
         soci141: selectedKeys.soci141,
-        wcwp: selectedKeys.wcwp
+        wcwp: selectedKeys.wcwp,
+        pace: selectedKeys.pace
       };
 
       localStorage.setItem("ucsd_custom_plans", JSON.stringify(customPlans));
@@ -976,7 +1002,8 @@
         cogs9: "COGS-009: Introduction to Data Science (4.0 Units)",
         cogs14a: "COGS-014A: Introduction to Research Methods (4.0 Units)",
         soci141: "SOCI-141: Crime and Society — Warren Upper-Div GE (4.0 Units)",
-        wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units)"
+        wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units)",
+        pace: "Triton Firsts (PACE Fellowship): Website Design & UX Intern (8.0 Hrs/Wk)"
       };
       document.getElementById("customizerTitle").innerText = titles[tabKey];
       renderSectionCards();
@@ -1038,7 +1065,7 @@
 
     function selectSection(courseKey, itemKey, e) {
       if (e) e.stopPropagation();
-      if ((courseKey === 'wcwp' || courseKey === 'soci141') && selectedKeys[courseKey] === itemKey) {
+      if ((courseKey === 'wcwp' || courseKey === 'soci141' || courseKey === 'pace') && selectedKeys[courseKey] === itemKey) {
         selectedKeys[courseKey] = null;
         showToast(`Deselected ${courseKey.toUpperCase()}`);
       } else {
@@ -1054,11 +1081,13 @@
     }
 
     function updateDots() {
-      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'soci141', 'wcwp']) {
+      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'soci141', 'wcwp', 'pace']) {
         const dotElem = document.getElementById(`dot_${crs}`);
         if (!dotElem) continue;
         if (selectedKeys[crs]) {
-          dotElem.innerText = (crs === 'soci141') ? "✓ Booked" : "✓ Selected";
+          if (crs === 'soci141') dotElem.innerText = "✓ Booked";
+          else if (crs === 'pace') dotElem.innerText = "✓ 8 Hrs";
+          else dotElem.innerText = "✓ Selected";
           dotElem.style.color = "var(--accent-green)";
         } else {
           if (crs === 'wcwp') {
@@ -1108,8 +1137,10 @@
         });
       });
 
-      const totalUnits = sections.length * 4;
-      document.getElementById("unitsPill").innerText = `${totalUnits}.0 Units`;
+      const academicSections = sections.filter(sec => sec.courseKey !== 'pace');
+      const totalUnits = academicSections.length * 4;
+      const hasPace = sections.some(sec => sec.courseKey === 'pace');
+      document.getElementById("unitsPill").innerText = hasPace ? `${totalUnits}.0 Units + 8h PACE` : `${totalUnits}.0 Units`;
 
       const eventsByDay = { "M": [], "Tu": [], "W": [], "Th": [], "F": [] };
 
@@ -1169,7 +1200,7 @@
           const next = dayEvs[i+1];
           const gapMin = Math.round((next.startH - curr.endH) * 60);
 
-          if (gapMin >= 0 && gapMin <= 60 && curr.room !== next.room) {
+          if (gapMin >= 0 && gapMin <= 60 && curr.room !== next.room && !curr.room.includes("Virtual") && !next.room.includes("Virtual")) {
             const colIdx = DAYS_MAP[day];
             const startRow = 2 + Math.floor(curr.endH - 9.0);
             
@@ -1187,6 +1218,9 @@
             else if (curr.room.includes("FAH") && next.room.includes("CSB")) walkEstMin = "8";
             else if (curr.room.includes("FAH") && next.room.includes("CENTR")) walkEstMin = "9";
             else if (curr.room.includes("CENTR") && next.room.includes("HSS")) walkEstMin = "6";
+            else if (curr.room.includes("HSS") && next.room.includes("SSC")) walkEstMin = "8";
+            else if (curr.room.includes("SSC") && next.room.includes("FAH")) walkEstMin = "10";
+            else if (curr.room.includes("Catalyst") && next.room.includes("SSC")) walkEstMin = "12";
 
             routeTag.innerHTML = `🚶 ${curr.room.split(' ')[0]} ➔ ${next.room.split(' ')[0]} (~${walkEstMin}m walk)`;
             routeTag.title = `Click to view walking route (${curr.room} ➔ ${next.room})`;
