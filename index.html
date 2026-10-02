@@ -52,6 +52,10 @@
       --pace-bg: rgba(236, 72, 153, 0.15);
       --pace-border: rgba(236, 72, 153, 0.45);
 
+      --tdge125-color: #f97316;
+      --tdge125-bg: rgba(249, 115, 22, 0.14);
+      --tdge125-border: rgba(249, 115, 22, 0.45);
+
       --radius-lg: 20px;
       --radius-md: 14px;
       --radius-sm: 8px;
@@ -92,6 +96,10 @@
       --pace-color: #db2777;
       --pace-bg: #fdf2f8;
       --pace-border: #f472b6;
+
+      --tdge125-color: #c2410c;
+      --tdge125-bg: #ffedd5;
+      --tdge125-border: #fdba74;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -368,6 +376,7 @@
     .matrix-event-block.wcwp100 { background: var(--wcwp-bg); border: 1.5px solid var(--wcwp-border); color: var(--wcwp-color); }
     .matrix-event-block.math183 { background: var(--math183-bg); border: 1.5px solid var(--math183-border); color: var(--math183-color); }
     .matrix-event-block.pace { background: var(--pace-bg); border: 1.5px solid var(--pace-border); color: var(--pace-color); }
+    .matrix-event-block.tdge125 { background: var(--tdge125-bg); border: 1.5px solid var(--tdge125-border); color: var(--tdge125-color); }
 
     .block-header-row { display: flex; justify-content: space-between; align-items: flex-start; }
     .block-code-text { font-weight: 800; font-size: 0.74rem; font-family: var(--font-mono); }
@@ -453,6 +462,8 @@
     .tab-course-pill.wcwp .tab-c-code { color: var(--wcwp-color); }
     .tab-course-pill.pace.active { border-color: var(--pace-color); }
     .tab-course-pill.pace .tab-c-code { color: var(--pace-color); }
+    .tab-course-pill.tdge125.active { border-color: var(--tdge125-color); }
+    .tab-course-pill.tdge125 .tab-c-code { color: var(--tdge125-color); }
 
     .section-cards-deck {
       display: flex;
@@ -681,9 +692,13 @@
           <span class="tab-c-code">COGS 14A</span>
           <span class="tab-c-dot" id="dot_cogs14a">✓ Selected</span>
         </button>
+        <button class="tab-course-pill tdge125" onclick="switchCourseTab('tdge125')" id="cTab_tdge125">
+          <span class="tab-c-code">TDGE 125</span>
+          <span class="tab-c-dot" id="dot_tdge125">✓ Selected</span>
+        </button>
         <button class="tab-course-pill wcwp" onclick="switchCourseTab('wcwp')" id="cTab_wcwp">
           <span class="tab-c-code">WCWP 100</span>
-          <span class="tab-c-dot" id="dot_wcwp">○ WL #5</span>
+          <span class="tab-c-dot" id="dot_wcwp">○ Dropped</span>
         </button>
         <button class="tab-course-pill pace" onclick="switchCourseTab('pace')" id="cTab_pace">
           <span class="tab-c-code">PACE (Rosa)</span>
@@ -764,6 +779,7 @@
       "WLH 2113": { bldgName: "Warren Lecture Hall (WLH)", bldgNumber: "Building #625", room: "Room 2113 (2nd Floor)", address: "3224 Matthews Ln, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Warren+Lecture+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880592,-117.234421&q=Warren+Lecture+Hall+UCSD" },
       "FAH 1301": { bldgName: "Franklin Antonio Hall (FAH)", bldgNumber: "Building #395", room: "Auditorium Room 1301 (1st Floor)", address: "3180 Voigt Dr, La Jolla, CA 92093", neighborhood: "Warren College Engineering", googleUrl: "https://www.google.com/maps/search/?api=1&query=Franklin+Antonio+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.883501,-117.234915&q=Franklin+Antonio+Hall+UCSD" },
       "PCH 109": { bldgName: "Pepper Canyon Hall (PCH)", bldgNumber: "Building #246", room: "Auditorium Room 109 (1st Floor)", address: "9435 Russell Ln, La Jolla, CA 92093", neighborhood: "Pepper Canyon / Central Hub", googleUrl: "https://www.google.com/maps/search/?api=1&query=Pepper+Canyon+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.878377,-117.233761&q=Pepper+Canyon+Hall+UCSD" },
+      "PCYNH 109": { bldgName: "Pepper Canyon Hall (PCYNH)", bldgNumber: "Building #246", room: "Room 109 (1st Floor)", address: "9435 Russell Ln, La Jolla, CA 92093", neighborhood: "Pepper Canyon / Central Hub", googleUrl: "https://www.google.com/maps/search/?api=1&query=Pepper+Canyon+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.878377,-117.233761&q=Pepper+Canyon+Hall+UCSD" },
       "PCH 120": { bldgName: "Pepper Canyon Hall (PCH)", bldgNumber: "Building #246", room: "Room 120 (1st Floor)", address: "9435 Russell Ln, La Jolla, CA 92093", neighborhood: "Pepper Canyon / Central Hub", googleUrl: "https://www.google.com/maps/search/?api=1&query=Pepper+Canyon+Hall,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.878377,-117.233761&q=Pepper+Canyon+Hall+UCSD" },
       "Catalyst 0125": { bldgName: "Catalyst Building (NTPLLN)", bldgNumber: "Building #980", room: "Room 0125 (Ground Floor)", address: "9685 Scholars Dr N, La Jolla, CA 92093", neighborhood: "North Torrey Pines (NTPLLN)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Catalyst+Building,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.880443,-117.241634&q=Catalyst+Building+UCSD" },
       "SAC 101": { bldgName: "Student Activity Center (SAC)", bldgNumber: "Building #229", room: "Room 101", address: "Voigt Dr, La Jolla, CA 92093", neighborhood: "Earl Warren College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Student+Activity+Center+Warren+College,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Student+Activity+Center+Warren+College+UCSD" },
@@ -844,18 +860,23 @@
           { type: "In-Person Work", days: ["W"], start: "11:30", end: "13:30", room: "SSC 562", code: "PACE (In-Person)", title: "Triton Firsts UX Internship", colorClass: "pace" },
           { type: "In-Person Work", days: ["Th"], start: "13:00", end: "15:00", room: "SSC 562", code: "PACE (In-Person)", title: "Triton Firsts UX Internship", colorClass: "pace" }
         ]}
+      ],
+      tdge125: [
+        { key: "P001", bookingId: "00153834", code: "TDGE-125 (P-001-001)", instructor: "Allan Havis", statusText: "✅ BOOKED — Confirmed Seat", isWaitlist: false, events: [
+          { type: "Lecture", days: ["W"], start: "17:00", end: "19:50", room: "PCYNH 109", code: "TDGE 125 (LE)", title: "Topics in Theatre and Film", colorClass: "tdge125" }
+        ]}
       ]
     };
 
     const BUILTIN_PRESETS = {
-      REG: { name: "✅ Enrolled 14 Units + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", wcwp: null, pace: "PACE_DEFAULT" },
-      WITH_WCWP: { name: "⏳ If WCWP Clears (18 Units) + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", wcwp: "P008", pace: "PACE_DEFAULT" }
+      REG: { name: "✅ Enrolled 16 Units + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: "P001", wcwp: null, pace: "PACE_DEFAULT" },
+      NO_TDGE: { name: "⚪ Without TDGE 125 (12 Units) + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: null, wcwp: null, pace: "PACE_DEFAULT" }
     };
 
     let customPlans = JSON.parse(localStorage.getItem("ucsd_custom_plans") || "{}");
     let activeCourseTab = "dsc10";
     let currentPlanKey = "REG";
-    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", wcwp: null, pace: "PACE_DEFAULT" };
+    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: "P001", wcwp: null, pace: "PACE_DEFAULT" };
     let currentModalQuery = "";
     let currentModalBookingId = "";
 
@@ -921,7 +942,7 @@
     function loadPlan(k) {
       currentPlanKey = k;
       const p = BUILTIN_PRESETS[k];
-      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, wcwp: p.wcwp, math183: p.math183, pace: p.pace || "PACE_DEFAULT" };
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, tdge125: p.tdge125, wcwp: p.wcwp, pace: p.pace || "PACE_DEFAULT" };
       renderPlanPills();
       renderSectionCards();
       renderCalendarMatrix();
@@ -932,7 +953,7 @@
     function loadCustomPlan(k) {
       currentPlanKey = k;
       const p = customPlans[k];
-      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, wcwp: p.wcwp, pace: p.pace || "PACE_DEFAULT" };
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, tdge125: p.tdge125, wcwp: p.wcwp, pace: p.pace || "PACE_DEFAULT" };
       renderPlanPills();
       renderSectionCards();
       renderCalendarMatrix();
@@ -951,6 +972,7 @@
         dsc10: selectedKeys.dsc10,
         cogs9: selectedKeys.cogs9,
         cogs14a: selectedKeys.cogs14a,
+        tdge125: selectedKeys.tdge125,
         wcwp: selectedKeys.wcwp,
         pace: selectedKeys.pace
       };
@@ -980,7 +1002,8 @@
         dsc10: "DSC-010: Principles of Data Science (4.0 Units)",
         cogs9: "COGS-009: Introduction to Data Science (4.0 Units)",
         cogs14a: "COGS-014A: Introduction to Research Methods (4.0 Units)",
-        wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units)",
+        tdge125: "TDGE-125: Topics in Theatre and Film (4.0 Units)",
+        wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units - Dropped)",
         pace: "Triton Firsts (PACE Fellowship): Website Design & UX Intern (8.0 Hrs/Wk)"
       };
       document.getElementById("customizerTitle").innerText = titles[tabKey];
@@ -1043,7 +1066,7 @@
 
     function selectSection(courseKey, itemKey, e) {
       if (e) e.stopPropagation();
-      if ((courseKey === 'wcwp' || courseKey === 'pace') && selectedKeys[courseKey] === itemKey) {
+      if ((courseKey === 'wcwp' || courseKey === 'pace' || courseKey === 'tdge125') && selectedKeys[courseKey] === itemKey) {
         selectedKeys[courseKey] = null;
         showToast(`Deselected ${courseKey.toUpperCase()}`);
       } else {
@@ -1059,7 +1082,7 @@
     }
 
     function updateDots() {
-      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'wcwp', 'pace']) {
+      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'tdge125', 'wcwp', 'pace']) {
         const dotElem = document.getElementById(`dot_${crs}`);
         if (!dotElem) continue;
         if (selectedKeys[crs]) {
@@ -1068,8 +1091,8 @@
           dotElem.style.color = "var(--accent-green)";
         } else {
           if (crs === 'wcwp') {
-            dotElem.innerText = "○ WL #5";
-            dotElem.style.color = "var(--accent-gold)";
+            dotElem.innerText = "○ Dropped";
+            dotElem.style.color = "var(--text-muted)";
           } else {
             dotElem.innerText = "○ Not selected";
             dotElem.style.color = "var(--accent-rose)";
@@ -1198,6 +1221,7 @@
             else if (curr.room.includes("HSS") && next.room.includes("SSC")) walkEstMin = "8";
             else if (curr.room.includes("SSC") && next.room.includes("FAH")) walkEstMin = "10";
             else if (curr.room.includes("Catalyst") && next.room.includes("SSC")) walkEstMin = "12";
+            else if (curr.room.includes("PCYNH") || next.room.includes("PCYNH") || curr.room.includes("PCH") || next.room.includes("PCH")) walkEstMin = "7";
 
             routeTag.innerHTML = `🚶 ${curr.room.split(' ')[0]} ➔ ${next.room.split(' ')[0]} (~${walkEstMin}m walk)`;
             routeTag.title = `Click to view walking route (${curr.room} ➔ ${next.room})`;
