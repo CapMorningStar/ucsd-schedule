@@ -56,6 +56,10 @@
       --tdge125-bg: rgba(249, 115, 22, 0.14);
       --tdge125-border: rgba(249, 115, 22, 0.45);
 
+      --arcell-color: #a78bfa;
+      --arcell-bg: rgba(139, 92, 246, 0.15);
+      --arcell-border: rgba(139, 92, 246, 0.5);
+
       --radius-lg: 20px;
       --radius-md: 14px;
       --radius-sm: 8px;
@@ -100,6 +104,10 @@
       --tdge125-color: #c2410c;
       --tdge125-bg: #ffedd5;
       --tdge125-border: #fdba74;
+
+      --arcell-color: #6d28d9;
+      --arcell-bg: #f5f3ff;
+      --arcell-border: #a78bfa;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -377,6 +385,7 @@
     .matrix-event-block.math183 { background: var(--math183-bg); border: 1.5px solid var(--math183-border); color: var(--math183-color); }
     .matrix-event-block.pace { background: var(--pace-bg); border: 1.5px solid var(--pace-border); color: var(--pace-color); }
     .matrix-event-block.tdge125 { background: var(--tdge125-bg); border: 1.5px solid var(--tdge125-border); color: var(--tdge125-color); }
+    .matrix-event-block.arcell { background: var(--arcell-bg); border: 1.5px solid var(--arcell-border); color: var(--arcell-color); }
 
     .block-header-row { display: flex; justify-content: space-between; align-items: flex-start; }
     .block-code-text { font-weight: 800; font-size: 0.74rem; font-family: var(--font-mono); }
@@ -464,6 +473,8 @@
     .tab-course-pill.pace .tab-c-code { color: var(--pace-color); }
     .tab-course-pill.tdge125.active { border-color: var(--tdge125-color); }
     .tab-course-pill.tdge125 .tab-c-code { color: var(--tdge125-color); }
+    .tab-course-pill.arcell.active { border-color: var(--arcell-color); }
+    .tab-course-pill.arcell .tab-c-code { color: var(--arcell-color); }
 
     .section-cards-deck {
       display: flex;
@@ -597,6 +608,7 @@
     .btn-map-action.google { background: #0284c7; color: #ffffff; }
     .btn-map-action.route { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; }
     .btn-map-action.copy { background: var(--bg-surface-solid); color: var(--text-main); border: 1px solid var(--border-subtle); }
+    .btn-map-action.meet { grid-column: 1 / -1; flex-direction: row; gap: 8px; background: linear-gradient(135deg, #00897b 0%, #1a73e8 100%); color: #ffffff; font-size: 0.92rem; padding: 14px 10px; }
 
     .toast-spatial {
       position: fixed; bottom: 24px; right: 16px; left: 16px; max-width: 380px; margin: 0 auto; background: var(--bg-surface-solid); border: 1px solid var(--accent-cyan); color: var(--text-main); padding: 12px 18px; border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0,0,0,0.6); font-size: 0.82rem; font-weight: 700; font-family: var(--font-mono); display: flex; align-items: center; gap: 10px; z-index: 1000; transform: translateY(100px); opacity: 0; transition: all 0.3s;
@@ -704,6 +716,10 @@
           <span class="tab-c-code">PACE (Rosa)</span>
           <span class="tab-c-dot" id="dot_pace">✓ 8 Hrs</span>
         </button>
+        <button class="tab-course-pill arcell" onclick="switchCourseTab('arcell')" id="cTab_arcell">
+          <span class="tab-c-code">Arcell OH (Alex)</span>
+          <span class="tab-c-dot" id="dot_arcell">✓ Weekly</span>
+        </button>
       </div>
 
       <!-- Section Cards List -->
@@ -747,6 +763,10 @@
 
         <!-- 4 Action Buttons -->
         <div class="modal-map-action-grid">
+          <button class="btn-map-action meet" id="btnJoinMeet" onclick="openMeetLink()" style="display:none;">
+            <span>🎥</span>
+            <span>Join Google Meet</span>
+          </button>
           <button class="btn-map-action google" onclick="openDirectGoogleMaps()">
             <span>🗺️</span>
             <span>Google Maps</span>
@@ -798,6 +818,7 @@
       "Coalition B30": { bldgName: "Coalition Building (COA)", bldgNumber: "Building #265 (RWNLLN)", room: "Room B30 (Basement)", address: "Ridge Walk / 3015 Voigt Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Coalition+Building,+3015+Voigt+Dr,+La+Jolla,+CA+92093", appleUrl: "https://maps.apple.com/?ll=32.881886,-117.239780&q=Coalition+Building+UCSD" },
       "Podemos 1A18": { bldgName: "Podemos Building (Eighth College)", bldgNumber: "Building #910", room: "Room 1A18 (Classroom, 1st Floor)", address: "9235 Scholars Dr S, La Jolla, CA 92093", neighborhood: "Eighth College / Theatre District", googleUrl: "https://www.google.com/maps/search/?api=1&query=Podemos+Building,+Eighth+College,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Podemos+Building+Eighth+College+UCSD" },
       "SSC 562": { bldgName: "Student Services Center (SSC)", bldgNumber: "Building #402", room: "Room 562 (5th Floor)", address: "402 University Center, Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Near Price Center)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Student+Services+Center,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.879133,-117.236611&q=Student+Services+Center+UCSD" },
+      "Google Meet (Arcell)": { bldgName: "Google Meet (Remote)", bldgNumber: "Online", room: "meet.google.com/mzh-rkxb-gzx", address: "Remote — Arcell / YearZero team-wide office hours", neighborhood: "Online / Remote", meetUrl: "https://meet.google.com/mzh-rkxb-gzx", googleUrl: "https://meet.google.com/mzh-rkxb-gzx", appleUrl: "https://meet.google.com/mzh-rkxb-gzx" },
       "Virtual / Remote": { bldgName: "Triton Firsts Virtual Office", bldgNumber: "Online / Zoom", room: "Virtual Workspace", address: "Remote Work (UC San Diego First-Gen Initiatives)", neighborhood: "Online / Hybrid Work", googleUrl: "https://srs.ucsd.edu/initiatives/triton-firsts/about.html", appleUrl: "https://srs.ucsd.edu/initiatives/triton-firsts/about.html" }
     };
 
@@ -865,18 +886,23 @@
         { key: "P001", bookingId: "00153834", code: "TDGE-125 (P-001-001)", instructor: "Allan Havis", statusText: "✅ BOOKED — Confirmed Seat", isWaitlist: false, events: [
           { type: "Lecture", days: ["W"], start: "17:00", end: "19:50", room: "PCYNH 109", code: "TDGE 125 (LE)", title: "Topics in Theatre and Film", colorClass: "tdge125" }
         ]}
+      ],
+      arcell: [
+        { key: "ARCELL_OH", bookingId: "ARCELL-OH", code: "Arcell Office Hours (Weekly)", instructor: "Alex Velez Arce", statusText: "🎥 REMOTE — Fri 12–1 PM (Oct 16 – Dec 11)", isWaitlist: false, events: [
+          { type: "Remote Meeting", days: ["F"], start: "12:00", end: "13:00", room: "Google Meet (Arcell)", code: "ARCELL OH", title: "Arcell/YearZero/Alex Office Hours", colorClass: "arcell", startDate: "20261016", until: "20261212T075959Z", meetUrl: "https://meet.google.com/mzh-rkxb-gzx" }
+        ]}
       ]
     };
 
     const BUILTIN_PRESETS = {
-      REG: { name: "✅ Enrolled 16 Units + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: "P001", wcwp: null, pace: "PACE_DEFAULT" },
-      NO_TDGE: { name: "⚪ Without TDGE 125 (12 Units) + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: null, wcwp: null, pace: "PACE_DEFAULT" }
+      REG: { name: "✅ Enrolled 16 Units + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: "P001", wcwp: null, pace: "PACE_DEFAULT", arcell: "ARCELL_OH" },
+      NO_TDGE: { name: "⚪ Without TDGE 125 (12 Units) + PACE", dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: null, wcwp: null, pace: "PACE_DEFAULT", arcell: "ARCELL_OH" }
     };
 
     let customPlans = JSON.parse(localStorage.getItem("ucsd_custom_plans") || "{}");
     let activeCourseTab = "dsc10";
     let currentPlanKey = "REG";
-    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: "P001", wcwp: null, pace: "PACE_DEFAULT" };
+    let selectedKeys = { dsc10: "P004", cogs9: "P001", cogs14a: "P004", tdge125: "P001", wcwp: null, pace: "PACE_DEFAULT", arcell: "ARCELL_OH" };
     let currentModalQuery = "";
     let currentModalBookingId = "";
 
@@ -942,7 +968,7 @@
     function loadPlan(k) {
       currentPlanKey = k;
       const p = BUILTIN_PRESETS[k];
-      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, tdge125: p.tdge125, wcwp: p.wcwp, pace: p.pace || "PACE_DEFAULT" };
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, tdge125: p.tdge125, wcwp: p.wcwp, pace: p.pace || "PACE_DEFAULT", arcell: p.arcell !== undefined ? p.arcell : "ARCELL_OH" };
       renderPlanPills();
       renderSectionCards();
       renderCalendarMatrix();
@@ -953,7 +979,7 @@
     function loadCustomPlan(k) {
       currentPlanKey = k;
       const p = customPlans[k];
-      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, tdge125: p.tdge125, wcwp: p.wcwp, pace: p.pace || "PACE_DEFAULT" };
+      selectedKeys = { dsc10: p.dsc10, cogs9: p.cogs9, cogs14a: p.cogs14a, tdge125: p.tdge125, wcwp: p.wcwp, pace: p.pace || "PACE_DEFAULT", arcell: p.arcell !== undefined ? p.arcell : "ARCELL_OH" };
       renderPlanPills();
       renderSectionCards();
       renderCalendarMatrix();
@@ -974,7 +1000,8 @@
         cogs14a: selectedKeys.cogs14a,
         tdge125: selectedKeys.tdge125,
         wcwp: selectedKeys.wcwp,
-        pace: selectedKeys.pace
+        pace: selectedKeys.pace,
+        arcell: selectedKeys.arcell
       };
 
       localStorage.setItem("ucsd_custom_plans", JSON.stringify(customPlans));
@@ -1004,7 +1031,8 @@
         cogs14a: "COGS-014A: Introduction to Research Methods (4.0 Units)",
         tdge125: "TDGE-125: Topics in Theatre and Film (4.0 Units)",
         wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units - Dropped)",
-        pace: "Triton Firsts (PACE Fellowship): Website Design & UX Intern (8.0 Hrs/Wk)"
+        pace: "Triton Firsts (PACE Fellowship): Website Design & UX Intern (8.0 Hrs/Wk)",
+        arcell: "Arcell/YearZero/Alex Office Hours — Remote via Google Meet (Fri 12–1 PM)"
       };
       document.getElementById("customizerTitle").innerText = titles[tabKey];
       renderSectionCards();
@@ -1066,7 +1094,7 @@
 
     function selectSection(courseKey, itemKey, e) {
       if (e) e.stopPropagation();
-      if ((courseKey === 'wcwp' || courseKey === 'pace' || courseKey === 'tdge125') && selectedKeys[courseKey] === itemKey) {
+      if ((courseKey === 'wcwp' || courseKey === 'pace' || courseKey === 'tdge125' || courseKey === 'arcell') && selectedKeys[courseKey] === itemKey) {
         selectedKeys[courseKey] = null;
         showToast(`Deselected ${courseKey.toUpperCase()}`);
       } else {
@@ -1082,11 +1110,12 @@
     }
 
     function updateDots() {
-      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'tdge125', 'wcwp', 'pace']) {
+      for (const crs of ['dsc10', 'cogs9', 'cogs14a', 'tdge125', 'wcwp', 'pace', 'arcell']) {
         const dotElem = document.getElementById(`dot_${crs}`);
         if (!dotElem) continue;
         if (selectedKeys[crs]) {
           if (crs === 'pace') dotElem.innerText = "✓ 8 Hrs";
+          else if (crs === 'arcell') dotElem.innerText = "✓ Weekly";
           else dotElem.innerText = "✓ Selected";
           dotElem.style.color = "var(--accent-green)";
         } else {
@@ -1137,7 +1166,7 @@
         });
       });
 
-      const academicSections = sections.filter(sec => sec.courseKey !== 'pace');
+      const academicSections = sections.filter(sec => sec.courseKey !== 'pace' && sec.courseKey !== 'arcell');
       const totalUnits = academicSections.length * 4;
       const hasPace = sections.some(sec => sec.courseKey === 'pace');
       document.getElementById("unitsPill").innerText = hasPace ? `${totalUnits}.0 Units + 8h PACE` : `${totalUnits}.0 Units`;
@@ -1200,7 +1229,8 @@
           const next = dayEvs[i+1];
           const gapMin = Math.round((next.startH - curr.endH) * 60);
 
-          if (gapMin >= 0 && gapMin <= 60 && curr.room !== next.room && !curr.room.includes("Virtual") && !next.room.includes("Virtual")) {
+          const isRemoteRoom = (r) => r.includes("Virtual") || !!(UCSD_LOCATIONS[r] && UCSD_LOCATIONS[r].meetUrl);
+          if (gapMin >= 0 && gapMin <= 60 && curr.room !== next.room && !isRemoteRoom(curr.room) && !isRemoteRoom(next.room)) {
             const colIdx = DAYS_MAP[day];
             const startRow = 2 + Math.floor(curr.endH - 9.0);
             
@@ -1239,6 +1269,7 @@
     let currentModalGoogleUrl = "";
     let currentModalAppleUrl = "";
     let currentModalDirectionsUrl = "";
+    let currentModalMeetUrl = "";
 
     function openLocationPopup(code, title, type, instructor, days, start, end, room, bookingId, e) {
       if (e) e.stopPropagation();
@@ -1252,7 +1283,7 @@
       };
 
       document.getElementById("modalTitle").innerText = `${code} (${type})`;
-      document.getElementById("modalSub").innerText = `${title} • Prof. ${instructor}`;
+      document.getElementById("modalSub").innerText = loc.meetUrl ? `${title} • Host: ${instructor}` : `${title} • Prof. ${instructor}`;
       document.getElementById("modalBldgName").innerText = `${loc.bldgName} — ${loc.room}`;
       document.getElementById("modalBldgAddr").innerText = `${loc.bldgNumber}, ${loc.address}`;
       document.getElementById("modalNeighborTag").innerText = `📍 Neighborhood: ${loc.neighborhood}`;
@@ -1266,11 +1297,22 @@
       currentModalDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(currentModalQuery)}&travelmode=walking`;
       currentModalAppleUrl = loc.appleUrl || `https://maps.apple.com/?q=${encodeURIComponent(currentModalQuery)}`;
 
+      currentModalMeetUrl = loc.meetUrl || "";
+      document.getElementById("btnJoinMeet").style.display = currentModalMeetUrl ? "" : "none";
+      document.querySelectorAll(".btn-map-action.google, .btn-map-action.route, .btn-map-action.apple").forEach(b => {
+        b.style.display = currentModalMeetUrl ? "none" : "";
+      });
+
       document.getElementById("locModalOverlay").classList.add("show");
     }
 
     function closeLocModal() {
       document.getElementById("locModalOverlay").classList.remove("show");
+    }
+
+    function openMeetLink() {
+      if (!currentModalMeetUrl) return;
+      window.open(currentModalMeetUrl, '_blank') || (window.location.href = currentModalMeetUrl);
     }
 
     function openDirectAppleMaps() {
@@ -1325,10 +1367,12 @@
           ics += `UID:ucsd-fall2026-${sec.bookingId}-${sIdx}-${eIdx}@ucsd.edu\n`;
           ics += `SUMMARY:${ev.code} - ${ev.title}\n`;
           ics += `LOCATION:${loc.bldgName} (${ev.room}), ${loc.address}\n`;
-          ics += `DESCRIPTION:Instructor: ${sec.instructor} | Booking ID: ${sec.bookingId}\n`;
-          ics += `DTSTART;TZID=America/Los_Angeles:20260928T${startClean}\n`;
-          ics += `DTEND;TZID=America/Los_Angeles:20260928T${endClean}\n`;
-          ics += `RRULE:FREQ=WEEKLY;UNTIL=20261211T235959Z;BYDAY=${byDays}\n`;
+          const dtDate = ev.startDate || "20260928";
+          ics += `DESCRIPTION:Instructor: ${sec.instructor} | Booking ID: ${sec.bookingId}${ev.meetUrl ? ` | Google Meet: ${ev.meetUrl}` : ""}\n`;
+          if (ev.meetUrl) ics += `URL:${ev.meetUrl}\n`;
+          ics += `DTSTART;TZID=America/Los_Angeles:${dtDate}T${startClean}\n`;
+          ics += `DTEND;TZID=America/Los_Angeles:${dtDate}T${endClean}\n`;
+          ics += `RRULE:FREQ=WEEKLY;UNTIL=${ev.until || "20261211T235959Z"};BYDAY=${byDays}\n`;
           ics += "END:VEVENT\n";
         });
       });
