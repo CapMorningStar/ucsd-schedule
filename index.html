@@ -372,6 +372,12 @@
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
+    .matrix-event-block.compact-block {
+      padding: 2px 6px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
     .matrix-event-block:hover, .matrix-event-block:active {
       transform: translateY(-2px) scale(1.01);
       box-shadow: 0 8px 24px var(--border-glow);
@@ -1188,10 +1194,11 @@
           const duration = endH - startH;
 
           const startRow = baseRow + Math.floor(startOffset);
-          const heightPx = Math.max(52, duration * 50);
+          const isShort = duration < 0.75;
+          const heightPx = isShort ? Math.max(25, duration * 50) : Math.max(52, duration * 50);
 
           const block = document.createElement("div");
-          block.className = `matrix-event-block ${item.colorClass}`;
+          block.className = `matrix-event-block ${item.colorClass} ${isShort ? 'compact-block' : ''}`;
           block.style.gridColumn = `${colIdx}`;
           block.style.gridRow = `${startRow}`;
           block.style.marginTop = `${(startOffset % 1) * 50}px`;
@@ -1199,18 +1206,33 @@
 
           const secCodeBadge = item.parentCode ? (item.parentCode.match(/\(([^)]+)\)/)?.[1] || item.parentCode) : '';
 
-          block.innerHTML = `
-            <div class="block-header-row">
-              <span class="block-code-text">${item.code}</span>
-              <span class="block-type-pill">${item.type}</span>
-            </div>
-            <div class="block-title-text">${item.title}</div>
-            <div class="block-sec-badge" style="font-size:0.61rem; font-family:var(--font-mono); font-weight:700; opacity:0.92; margin:1px 0 2px 0;">🏷️ Sec: ${secCodeBadge} · ID: ${item.bookingId}</div>
-            <div class="block-footer-row">
-              <span class="block-room-badge">📍 ${item.room}</span>
-              <span>⏰ ${item.start}-${item.end}</span>
-            </div>
-          `;
+          if (isShort) {
+            block.innerHTML = `
+              <div style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; min-width:0;">
+                <div style="display:flex; align-items:center; gap:5px; min-width:0; overflow:hidden;">
+                  <span class="block-code-text" style="font-size:0.68rem; white-space:nowrap; flex-shrink:0;">${item.code}</span>
+                  <span style="font-size:0.60rem; opacity:0.85; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.instructor || item.title}</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:4px; font-size:0.59rem; font-family:var(--font-mono); white-space:nowrap; flex-shrink:0;">
+                  <span class="block-type-pill" style="padding:1px 3px;">${item.type === 'Remote Meeting' ? '🎥 Meet' : item.type}</span>
+                  <span>⏰ ${item.start}-${item.end}</span>
+                </div>
+              </div>
+            `;
+          } else {
+            block.innerHTML = `
+              <div class="block-header-row">
+                <span class="block-code-text">${item.code}</span>
+                <span class="block-type-pill">${item.type}</span>
+              </div>
+              <div class="block-title-text">${item.title}</div>
+              <div class="block-sec-badge" style="font-size:0.61rem; font-family:var(--font-mono); font-weight:700; opacity:0.92; margin:1px 0 2px 0;">🏷️ Sec: ${secCodeBadge} · ID: ${item.bookingId}</div>
+              <div class="block-footer-row">
+                <span class="block-room-badge">📍 ${item.room}</span>
+                <span>⏰ ${item.start}-${item.end}</span>
+              </div>
+            `;
+          }
 
           block.onclick = (e) => {
             e.stopPropagation();
