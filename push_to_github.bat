@@ -8,7 +8,7 @@ git push -u origin main
 echo.
 if %errorlevel% equ 0 (
     echo ========================================================
-    echo  SUCCESS! Changes are pushed and syncing with Netlify!
+    echo  SUCCESS! Changes are pushed and syncing with GitHub Pages!
     echo ========================================================
 ) else (
     echo ========================================================

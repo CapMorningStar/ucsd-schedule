@@ -5,7 +5,7 @@ An interactive, responsive schedule planner and campus navigation studio designe
 ---
 
 ## 🌟 Live Demo & Mobile Web App
-- 📱 **Live Netlify Web App**: [https://dynamic-pothos-6e5b61.netlify.app](https://dynamic-pothos-6e5b61.netlify.app)
+- 📱 **Live Web App (GitHub Pages)**: [https://capmorningstar.github.io/ucsd-schedule/](https://capmorningstar.github.io/ucsd-schedule/)
 - 📅 **Direct Calendar Sync**: Download `UCSD_Fall_2026_Schedule.ics` and tap to import all classes into Apple Calendar & Google Calendar.
 
 ---
