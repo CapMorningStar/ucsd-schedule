@@ -717,7 +717,7 @@
           <span class="tab-c-dot" id="dot_pace">✓ 8 Hrs</span>
         </button>
         <button class="tab-course-pill arcell" onclick="switchCourseTab('arcell')" id="cTab_arcell">
-          <span class="tab-c-code">Arcell OH (Alex)</span>
+          <span class="tab-c-code">Arcell (Alex)</span>
           <span class="tab-c-dot" id="dot_arcell">✓ Weekly</span>
         </button>
       </div>
@@ -818,7 +818,7 @@
       "Coalition B30": { bldgName: "Coalition Building (COA)", bldgNumber: "Building #265 (RWNLLN)", room: "Room B30 (Basement)", address: "Ridge Walk / 3015 Voigt Dr, La Jolla, CA 92093", neighborhood: "Thurgood Marshall College", googleUrl: "https://www.google.com/maps/search/?api=1&query=Coalition+Building,+3015+Voigt+Dr,+La+Jolla,+CA+92093", appleUrl: "https://maps.apple.com/?ll=32.881886,-117.239780&q=Coalition+Building+UCSD" },
       "Podemos 1A18": { bldgName: "Podemos Building (Eighth College)", bldgNumber: "Building #910", room: "Room 1A18 (Classroom, 1st Floor)", address: "9235 Scholars Dr S, La Jolla, CA 92093", neighborhood: "Eighth College / Theatre District", googleUrl: "https://www.google.com/maps/search/?api=1&query=Podemos+Building,+Eighth+College,+UC+San+Diego", appleUrl: "https://maps.apple.com/?q=Podemos+Building+Eighth+College+UCSD" },
       "SSC 562": { bldgName: "Student Services Center (SSC)", bldgNumber: "Building #402", room: "Room 562 (5th Floor)", address: "402 University Center, Gilman Dr, La Jolla, CA 92093", neighborhood: "University Center (Near Price Center)", googleUrl: "https://www.google.com/maps/search/?api=1&query=Student+Services+Center,+UC+San+Diego", appleUrl: "https://maps.apple.com/?ll=32.879133,-117.236611&q=Student+Services+Center+UCSD" },
-      "Google Meet (Arcell)": { bldgName: "Google Meet (Remote)", bldgNumber: "Online", room: "meet.google.com/mzh-rkxb-gzx", address: "Remote — Arcell / YearZero team-wide office hours", neighborhood: "Online / Remote", meetUrl: "https://meet.google.com/mzh-rkxb-gzx", googleUrl: "https://meet.google.com/mzh-rkxb-gzx", appleUrl: "https://meet.google.com/mzh-rkxb-gzx" },
+      "Google Meet (Arcell)": { bldgName: "Google Meet (Remote)", bldgNumber: "Online", room: "meet.google.com/mcq-exsr-cqf", address: "Remote — Arcell AI Intern Sync (Alex Velez Arce)", neighborhood: "Online / Remote", meetUrl: "https://meet.google.com/mcq-exsr-cqf", googleUrl: "https://meet.google.com/mcq-exsr-cqf", appleUrl: "https://meet.google.com/mcq-exsr-cqf" },
       "Virtual / Remote": { bldgName: "Triton Firsts Virtual Office", bldgNumber: "Online / Zoom", room: "Virtual Workspace", address: "Remote Work (UC San Diego First-Gen Initiatives)", neighborhood: "Online / Hybrid Work", googleUrl: "https://srs.ucsd.edu/initiatives/triton-firsts/about.html", appleUrl: "https://srs.ucsd.edu/initiatives/triton-firsts/about.html" }
     };
 
@@ -888,8 +888,8 @@
         ]}
       ],
       arcell: [
-        { key: "ARCELL_OH", bookingId: "ARCELL-OH", code: "Arcell Office Hours (Weekly)", instructor: "Alex Velez Arce", statusText: "🎥 REMOTE — Fri 12–1 PM (Oct 16 – Dec 11)", isWaitlist: false, events: [
-          { type: "Remote Meeting", days: ["F"], start: "12:00", end: "13:00", room: "Google Meet (Arcell)", code: "ARCELL OH", title: "Arcell/YearZero/Alex Office Hours", colorClass: "arcell", startDate: "20261016", until: "20261212T075959Z", meetUrl: "https://meet.google.com/mzh-rkxb-gzx" }
+        { key: "ARCELL_OH", bookingId: "ARCELL-SYNC", code: "Arcell AI Intern Sync (Weekly)", instructor: "Alex Velez Arce", statusText: "🎥 REMOTE — Thu 12:30–1:00 PM (Weekly)", isWaitlist: false, events: [
+          { type: "Remote Meeting", days: ["Th"], start: "12:30", end: "13:00", room: "Google Meet (Arcell)", code: "ARCELL SYNC", title: "Arcell AI Intern Sync (Alex)", colorClass: "arcell", startDate: "20261015", until: "20261212T075959Z", meetUrl: "https://meet.google.com/mcq-exsr-cqf" }
         ]}
       ]
     };
@@ -1032,7 +1032,7 @@
         tdge125: "TDGE-125: Topics in Theatre and Film (4.0 Units)",
         wcwp: "WCWP-100: Academic Writing — Warren (4.0 Units - Dropped)",
         pace: "Triton Firsts (PACE Fellowship): Website Design & UX Intern (8.0 Hrs/Wk)",
-        arcell: "Arcell/YearZero/Alex Office Hours — Remote via Google Meet (Fri 12–1 PM)"
+        arcell: "Arcell AI Intern Sync (Alex) — Remote via Google Meet (Thu 12:30–1:00 PM)"
       };
       document.getElementById("customizerTitle").innerText = titles[tabKey];
       renderSectionCards();
